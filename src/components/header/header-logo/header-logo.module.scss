@@ -1,0 +1,21 @@
+.logo {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.text {
+  margin: 0 0 0 var(--space-l);
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+
+  &::before {
+    content: '';
+    inset: 0;
+    display: block;
+    position: absolute;
+  }
+}

@@ -1,0 +1,184 @@
+$layout-column-gap: 48px;
+
+.layout {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-areas:
+    "name        name"
+    "image       meta"
+    "summary     summary"
+    "ingredients equipment"
+    "directions  directions";
+  gap: $layout-column-gap $layout-column-gap * 2;
+}
+
+.name {
+  grid-area: name; 
+
+  .link {
+    text-decoration: none;
+    color: inherit;
+
+    &::before {
+      content: '';
+      display: inline-block;
+      background-color: var(--brand);
+      width: 32px;
+      height: 32px;
+      margin: 0 var(--space-m) 0 0;
+      mask-image: url('./recipe-card.assets/backward-icon.svg');
+      mask-repeat: no-repeat;
+      mask-position: center;
+      mask-size: 32px;
+    }
+  }
+}
+
+.summary {
+  grid-area: summary;
+  padding: 36px;
+  background-color: #B5460F54;
+  border-radius: var(--border-radius);
+}
+
+
+.list {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin: 0;
+  padding: 0;
+  gap: var(--space-xxs);
+}
+
+.listItem {
+  display: flex;
+  flex-basis: 50%;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+    margin: 0 var(--space-m) 0 0;
+    background-size: 24px;
+    flex-shrink: 0;
+  }
+}
+
+.listItemText {
+  align-self: center;
+}
+
+.list.listTypeIngredients {
+  .listItem {
+    &::before {
+      background-image: url('./recipe-card.assets/ingredient-icon.svg');
+    }
+  }
+}
+
+.list.listTypeEquipment {
+  .listItem {
+    &::before {
+      background-image: url('./recipe-card.assets/equipment-icon.svg');
+    }
+  }
+}
+
+.ingredients {
+  grid-area: ingredients;
+}
+
+.column {
+  + .column {
+    position: relative;
+
+    $delimiter-left: -$layout-column-gap;
+
+    &::before {
+      content: '';
+      display: block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background-color: var(--brand);
+      position: absolute;
+      left: $delimiter-left;
+      transform: translateX(-50%);
+    }
+
+    &::after {
+      display: block;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      background: var(--brand);
+      width: 1px;
+      top: 12px;
+      left: $delimiter-left;
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.equipment {
+  grid-area: equipment;
+}
+
+.directions {
+  grid-area: directions;
+}
+
+.steps {
+  counter-reset: step;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.step {
+  display: block;
+
+  &:not(:last-child) {
+    margin-bottom: var(--space-m);
+  }
+
+  &::before {
+    display: block;
+    counter-increment: step number-of-count;
+    content: "Step " counter(step);
+    font-weight: 600;
+    margin: 0 0 var(--space-xxs);
+  }
+}
+
+.meta {
+  grid-area: meta;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  text-align: center;
+  gap: 100px;
+}
+
+.term {
+  display: block;
+  margin: 0;
+}
+
+.definition {
+  display: block;
+  margin: var(--space-xxs) 0 0;
+}
+
+.caption {
+  margin: 0 0 var(--space-xl);
+}
+
+.image {
+  grid-aria: image;
+  border-radius: var(--border-radius);
+  width: 448px;
+  height: 298px;
+}

@@ -1,0 +1,30 @@
+.list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  justify-content: center;
+}
+
+.item {
+  display: block;
+}
+
+.clamp,
+.button {
+  display: inline-block;
+  line-height: 22px;
+  font-size: 18px;
+  font-family: inherit;
+  padding: var(--space-s) var(--space-xs);
+}
+
+.button {
+  cursor: pointer;
+  border: 0;
+  background: 0;
+
+  &.active {
+    color: #fff;
+    background: var(--brand);
+  }
+}

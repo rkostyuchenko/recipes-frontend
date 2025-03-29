@@ -1,0 +1,48 @@
+.loader {
+  display: flex;
+  place-content: center;
+}
+
+.loader::before {
+  content: '';
+  display: block;
+  margin: auto;
+  border: solid var(--loader-color, var(--brand));
+  border-radius: 50%;
+  border-right-color: transparent;
+  transform: rotate(32deg);
+}
+
+.sizeL {
+  width: 60px;
+  height: 60px;
+}
+
+.sizeL::before {
+  width: 30px;
+  height: 30px;
+  border-width: 5px;
+}
+
+.sizeM {
+  width: 48px;
+  height: 48px;
+}
+
+.sizeM::before {
+  width: 24px;
+  height: 24px;
+  border-width: 4px;
+}
+
+.sizeS {
+  width: 24px;
+  height: 24px;
+}
+
+.sizeS::before {
+  width: 12px;
+  height: 12px;
+  border-width: 2px;
+}
+

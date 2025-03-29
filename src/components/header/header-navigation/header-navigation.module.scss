@@ -1,0 +1,16 @@
+.list {
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: block;
+}
+
+.link {
+  text-decoration: none;
+}
+
+.link.active {
+  color: var(--brand);
+}
