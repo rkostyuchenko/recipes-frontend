@@ -1,5 +1,6 @@
 import Logo from './header-logo.svg?react';
 import Text from 'ui/text';
+import { Link } from 'react-router';
 
 import cn from 'classnames';
 
@@ -12,9 +13,11 @@ interface Props {
 const HeaderLogo: React.FC<Props> = ({ className }) => (
   <div className={cn(className, classes.logo)}>
     <Logo />
-    <Text className={classes.text} view="p-20" tag="span" weight="bold">
-      Food Client
-    </Text>
+    <Link className={classes.link} to="/">
+      <Text className={classes.text} view="p-20" tag="span" weight="bold">
+        Food Client
+      </Text>
+    </Link>
   </div>
 );
 
