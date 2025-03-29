@@ -1,0 +1,73 @@
+.text.clamped {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: var(--max-lines);
+  overflow: hidden;
+}
+
+.viewButton {
+  font-size: 18px;
+  line-height: 18px;
+}
+
+.viewTitle {
+  font-size: 44px;
+  line-height: 48px;
+  font-weight: 700;
+}
+
+.viewP20 {
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.viewP18 {
+  font-size: 18px;
+  line-height: 22px;
+}
+
+.viewP16 {
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.viewP14 {
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.colorSecondary {
+  color: var(--text-secondary);
+}
+
+.colorPrimary {
+  color: var(--text-primary);
+}
+
+.colorAccent {
+  color: var(--text-accent);
+}
+
+.weightNormal {
+  font-weight: 400;
+}
+
+.weightMedium {
+  font-weight: 500;
+}
+
+.weightBold {
+  font-weight: 700;
+}
+
+.alignStart {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignEnd {
+  text-align: right;
+}

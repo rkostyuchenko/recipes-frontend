@@ -1,0 +1,35 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  border: 0;
+  background-color: var(--brand);
+  padding: var(--space-s) var(--space-l);
+  cursor: pointer;
+  color: var(--button-primary-text);
+  height: 52px;
+  font: inherit;
+
+  --button-primary-text: #fff;
+  --button-primary-bg-disabled: #d9d9d9;
+}
+
+.button:not(:disabled):hover {
+  background-color: var(--brand-hover);
+}
+
+.button.disabled {
+  background-color: var(--button-primary-bg-disabled); 
+}
+
+.button:active:not(:disabled) {
+  background-color: var(--brand-active)
+}
+
+.icon {
+  display: block;
+  margin: 0 var(--space-xxs) 0 0;
+}
+
+.loader {
+  --loader-color: currentColor;
+}

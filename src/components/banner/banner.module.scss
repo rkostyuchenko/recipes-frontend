@@ -1,0 +1,12 @@
+.wrap {
+  display: flex;
+  height: 572px;
+  padding: var(--space-l);
+  background-image: url('./banner.assets/background.jpg');
+  background-size: auto 100%;
+  background-position: center;
+}
+
+.caption {
+  margin: auto auto 0 auto;
+}
