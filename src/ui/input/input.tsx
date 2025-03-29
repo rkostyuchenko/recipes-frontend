@@ -3,10 +3,7 @@ import cn from 'classnames';
 
 import classes from './input.module.css';
 
-export type InputProps = Omit<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  'onChange' | 'value'
-> & {
+export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> & {
   /** Значение поля */
   value?: string;
   /** Callback, вызываемый при вводе данных в поле */
@@ -15,39 +12,19 @@ export type InputProps = Omit<
   afterSlot?: React.ReactNode;
 };
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const {
-    className,
-    value,
-    afterSlot,
-    onChange,
-    ...inputProps
-  } = props;
+const Input = ({ ref, ...props }: InputProps & { ref?: React.RefObject<HTMLInputElement | null> }) => {
+  const { className, value, afterSlot, onChange, ...inputProps } = props;
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(event.target.value);
   };
 
   return (
-    <div className={cn(
-      classes.input,
-      className,
-    )}>
-      <input
-        ref={ref}
-        className={classes.control}
-        type="text"
-        value={value}
-        onChange={handleChange}
-        {...inputProps}
-      />
-      {afterSlot && (
-        <div className={classes.icon}>
-          {afterSlot}
-        </div>
-      )}
+    <div className={cn(classes.input, className)}>
+      <input ref={ref} className={classes.control} type="text" value={value} onChange={handleChange} {...inputProps} />
+      {afterSlot && <div className={classes.icon}>{afterSlot}</div>}
     </div>
   );
-});
+};
 
 export default Input;

@@ -14,13 +14,7 @@ export type Props = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const Button: React.FC<Props> = (props) => {
-  const {
-    className,
-    loading,
-    disabled,
-    children,
-    ...restProps
-  } = props;
+  const { className, loading, disabled, children, ...restProps } = props;
 
   return (
     <button
@@ -30,25 +24,17 @@ const Button: React.FC<Props> = (props) => {
           [classes.loading]: loading,
           [classes.disabled]: disabled,
         },
-        className
+        className,
       )}
       disabled={loading || disabled}
       {...restProps}
     >
-      {loading && (
-        <Loader
-          className={cn(classes.loader, classes.icon)}
-          size="s"
-        />
-      )}
-      <Text
-        view="button"
-        tag="span"
-      >
+      {loading && <Loader className={cn(classes.loader, classes.icon)} size="s" />}
+      <Text view="button" tag="span">
         {children}
       </Text>
     </button>
-  )
+  );
 };
 
 export default Button;

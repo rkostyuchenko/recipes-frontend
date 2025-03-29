@@ -5,9 +5,7 @@ import classes from './banner.module.scss';
 
 const Banner = () => (
   <PageMargin className={classes.wrap}>
-    <Caption
-      className={classes.caption}
-    />
+    <Caption className={classes.caption} />
   </PageMargin>
 );
 

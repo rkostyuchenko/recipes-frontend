@@ -1,8 +1,8 @@
-import js from '@eslint/js'
-import globals from 'globals'
-import reactHooks from 'eslint-plugin-react-hooks'
-import reactRefresh from 'eslint-plugin-react-refresh'
-import tseslint from 'typescript-eslint'
+import js from '@eslint/js';
+import globals from 'globals';
+import reactHooks from 'eslint-plugin-react-hooks';
+import reactRefresh from 'eslint-plugin-react-refresh';
+import tseslint from 'typescript-eslint';
 import importPlugin from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import eslintConfigPrettier from 'eslint-config-prettier/flat';
@@ -34,7 +34,7 @@ export default tseslint.config(
         typescript: {
           alwaysTryTypes: true,
           project: './tsconfig.json',
-        }
+        },
       },
     },
     plugins: {
@@ -47,10 +47,7 @@ export default tseslint.config(
       ...reactHooks.configs.recommended.rules,
       ...reactX.configs['recommended-typescript'].rules,
       ...reactDom.configs.recommended.rules,
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     },
   },
-)
+);

@@ -6,19 +6,19 @@ import useRequest from 'hooks/use-request';
 import qs from 'qs';
 
 type Ingredient = {
-  id: number
-  name: string
-  amount: number
-  unit: string
-}
+  id: number;
+  name: string;
+  amount: number;
+  unit: string;
+};
 
 type Direction = {
-  description: string
-}
+  description: string;
+};
 
 type RecipeImage = {
-  url: string
-}
+  url: string;
+};
 
 type RecipeEquipment = {
   id: number;
@@ -44,14 +44,10 @@ const RecipePage = () => {
   const { recipeId } = useParams();
 
   const query = qs.stringify({
-    populate: ['ingradients', 'equipments', 'directions.image', 'images', 'category']
+    populate: ['ingradients', 'equipments', 'directions.image', 'images', 'category'],
   });
 
-  const {
-    isFetching,
-    data,
-    error,
-  } = useRequest<Recipe>(`/recipes/${recipeId}?${query}`)
+  const { isFetching, data, error } = useRequest<Recipe>(`/recipes/${recipeId}?${query}`);
 
   if (error) {
     return null;
@@ -70,11 +66,7 @@ const RecipePage = () => {
             servings={`${data.data.servings} servings`}
             rating={`${data.data.rating} / 5`}
             summary={data.data.summary}
-            ingredients={data.data.ingradients.map(({
-              name,
-              amount,
-              unit
-            }) => `${amount} ${unit} ${name}`)}
+            ingredients={data.data.ingradients.map(({ name, amount, unit }) => `${amount} ${unit} ${name}`)}
             equipments={data.data.equipments.map(({ name }) => name)}
             directions={data.data.directions.map(({ description }) => description)}
             imageUrl={data.data.images[0]?.url}
@@ -83,6 +75,6 @@ const RecipePage = () => {
       </PageMargin>
     </PageSection>
   );
-}
+};
 
 export default RecipePage;

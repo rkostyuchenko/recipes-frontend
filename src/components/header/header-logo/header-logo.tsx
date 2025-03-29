@@ -6,21 +6,13 @@ import cn from 'classnames';
 import classes from './header-logo.module.scss';
 
 interface Props {
-  className?: string
+  className?: string;
 }
 
 const HeaderLogo: React.FC<Props> = ({ className }) => (
-  <div className={cn(
-    className,
-    classes.logo,
-  )}>
-    <Logo/>
-    <Text
-      className={classes.text}
-      view="p-20"
-      tag="span"
-      weight="bold"
-    >
+  <div className={cn(className, classes.logo)}>
+    <Logo />
+    <Text className={classes.text} view="p-20" tag="span" weight="bold">
       Food Client
     </Text>
   </div>

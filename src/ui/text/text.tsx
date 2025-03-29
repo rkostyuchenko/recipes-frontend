@@ -4,34 +4,25 @@ import cn from 'classnames';
 import classes from './text.module.scss';
 
 export type Props = {
-    /** Дополнительный класс */
-    className?: string;
-    /** Стиль отображения */
-    view?: 'title' | 'button' | 'p-20' | 'p-18' | 'p-16' | 'p-14';
-    /** Html-тег */
-    tag?:  'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'p' | 'span';
-    /** Начертание шрифта */
-    weight?: 'normal' | 'medium' | 'bold';
-    /** Контент */
-    children: React.ReactNode;
-    /** Цвет */
-    color?: 'primary' | 'secondary' | 'accent';
-    /** Максимальное кол-во строк */
-    maxLines?: number;
-    align?: 'center' | 'end' | 'start';
+  /** Дополнительный класс */
+  className?: string;
+  /** Стиль отображения */
+  view?: 'title' | 'button' | 'p-20' | 'p-18' | 'p-16' | 'p-14';
+  /** Html-тег */
+  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'p' | 'span';
+  /** Начертание шрифта */
+  weight?: 'normal' | 'medium' | 'bold';
+  /** Контент */
+  children: React.ReactNode;
+  /** Цвет */
+  color?: 'primary' | 'secondary' | 'accent';
+  /** Максимальное кол-во строк */
+  maxLines?: number;
+  align?: 'center' | 'end' | 'start';
 };
 
 const Text: React.FC<Props> = (props) => {
-  const {
-    className,
-    tag: Tag = 'p',
-    view,
-    weight,
-    color,
-    maxLines,
-    align,
-    children,
-  } = props;
+  const { className, tag: Tag = 'p', view, weight, color, maxLines, align, children } = props;
 
   return (
     <Tag
@@ -65,11 +56,13 @@ const Text: React.FC<Props> = (props) => {
           [classes.clamped]: !!maxLines,
         },
       )}
-      {...maxLines ? {
-        style: {
-          '--max-lines': maxLines,
-        } as React.CSSProperties, 
-      } : {}}
+      {...(maxLines
+        ? {
+            style: {
+              '--max-lines': maxLines,
+            } as React.CSSProperties,
+          }
+        : {})}
     >
       {children}
     </Tag>

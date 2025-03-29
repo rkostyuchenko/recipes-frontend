@@ -4,17 +4,14 @@ import cn from 'classnames';
 import classes from './loader.module.css';
 
 export type Props = {
-    /** Размер */
-    size?: 's' | 'm' | 'l';
-    /** Дополнительный класс */
-    className?: string;
+  /** Размер */
+  size?: 's' | 'm' | 'l';
+  /** Дополнительный класс */
+  className?: string;
 };
 
 const Loader: React.FC<Props> = (props) => {
-  const {
-    size = "l",
-    className,
-  } = props;
+  const { size = 'l', className } = props;
 
   return (
     <span

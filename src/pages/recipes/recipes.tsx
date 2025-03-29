@@ -7,17 +7,14 @@ import Spacer from 'components/spacer';
 const RecipesPage = () => {
   return (
     <>
-      <Banner/>
+      <Banner />
       <PageSection>
         <PageMargin>
-          <Text
-            view="p-20"
-            align="center"
-          >
+          <Text view="p-20" align="center">
             Find the perfect food and drink ideas for every occasion, from weeknight dinners to holiday feasts.
           </Text>
           <Spacer top={48}>
-            <RecipeList/>
+            <RecipeList />
           </Spacer>
         </PageMargin>
       </PageSection>

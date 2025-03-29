@@ -6,7 +6,7 @@ import AppRoot from 'components/app-root';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <AppRoot/>
+      <AppRoot />
     </BrowserRouter>
   </StrictMode>,
-)
+);

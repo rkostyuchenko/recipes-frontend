@@ -16,6 +16,6 @@ const useQueryParam = <T>(key: string, defaultValue: T) => {
   };
 
   return [value ? JSON.parse(value) : defaultValue, setValue];
-}
+};
 
 export default useQueryParam;

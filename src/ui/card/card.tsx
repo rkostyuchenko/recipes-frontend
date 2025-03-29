@@ -25,61 +25,33 @@ export type Props = {
 };
 
 const Card: React.FC<Props> = (props) => {
-  const {
-    image,
-    captionSlot,
-    title,
-    subtitle,
-    contentSlot,
-    actionSlot,
-    onClick,
-    className,
-  } = props;
+  const { image, captionSlot, title, subtitle, contentSlot, actionSlot, onClick, className } = props;
 
   return (
     <article className={cn(classes.card, className)} onClick={onClick}>
-      <span className={classes.imageWrap}>{image && <img className={classes.image} src={image} alt="" />}</span>
+      <span className={classes.imageWrap}>
+        <img className={classes.image} src={image} alt="" />
+      </span>
       <div className={classes.contentWrap}>
         {captionSlot && (
-          <Text
-            className={classes.caption}
-            view="p-14"
-            color="secondary"
-            maxLines={1}
-          >
+          <Text className={classes.caption} view="p-14" color="secondary" maxLines={1}>
             {captionSlot}
           </Text>
         )}
-        <Text
-          className={classes.title}
-          view="p-20"
-          maxLines={2}
-        >
+        <Text className={classes.title} view="p-20" maxLines={2}>
           {title}
         </Text>
-        <Text
-          className={classes.subtitle}
-          view="p-16"
-          color="secondary"
-          maxLines={3}
-        >
+        <Text className={classes.subtitle} view="p-16" color="secondary" maxLines={3} tag="div">
           {subtitle}
         </Text>
         {(actionSlot || contentSlot) && (
           <div className={classes.footer}>
             {contentSlot && (
-              <Text
-                className={classes.content}
-                view="p-18"
-              >
+              <Text className={classes.content} view="p-18">
                 {contentSlot}
               </Text>
             )}
-            {actionSlot && (
-              <span className={classes.action}>
-                {actionSlot}
-              </span>
-            )}
+            {actionSlot && <span className={classes.action}>{actionSlot}</span>}
           </div>
         )}
       </div>

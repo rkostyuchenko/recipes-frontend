@@ -8,10 +8,10 @@ const DefaultLayout = () => (
   <div className={classes.layout}>
     <div className={classes.header}>
       <PageMargin>
-        <Header/>
+        <Header />
       </PageMargin>
     </div>
-    <Outlet/>
+    <Outlet />
   </div>
 );
 

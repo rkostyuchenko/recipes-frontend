@@ -3,8 +3,9 @@ import Pagination from 'components/pagination';
 import Input from 'ui/input';
 import Button from 'ui/button';
 import SearchIcon from 'ui/icons/search-icon';
+import RawText from 'components/raw-text';
 
-import { useEffect, useState, useRef } from 'react';
+import { useRef } from 'react';
 import { useNavigate } from 'react-router';
 import useRequest from 'hooks/use-request';
 import useQueryParam from 'hooks/use-query-param';
@@ -17,18 +18,18 @@ type ImageFormat = 'thumbnail' | 'medium' | 'large';
 type RecipeImage = {
   formats: {
     [key in ImageFormat]?: {
-      url: string
-    }
-  }
+      url: string;
+    };
+  };
 };
 
 type Recipe = {
-  documentId: string
-  calories: number
-  cookingTime: number
-  summary: string
-  images: RecipeImage[]
-  name: string
+  documentId: string;
+  calories: number;
+  cookingTime: number;
+  summary: string;
+  images: RecipeImage[];
+  name: string;
 };
 
 const pageSize = 9;
@@ -38,7 +39,7 @@ const RecipeList = () => {
 
   const [page, setPage] = useQueryParam('page', 1);
   const [search, setSearch] = useQueryParam('q', '');
-  const searchInputRef = useRef<HTMLInputElement>();
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const query = qs.stringify({
     populate: ['images'],
@@ -49,15 +50,11 @@ const RecipeList = () => {
     filters: {
       name: {
         $contains: search,
-      }
-    }
+      },
+    },
   });
 
-  const {
-    isFetching,
-    data,
-    error,
-  } = useRequest<Recipe[]>(`/recipes?${query}`);
+  const { isFetching, data, error } = useRequest<Recipe[]>(`/recipes?${query}`);
 
   if (isFetching) {
     return null;
@@ -71,63 +68,45 @@ const RecipeList = () => {
     event.preventDefault();
 
     const search = searchInputRef.current?.value;
-  
+
     setSearch(search);
     setPage(1);
   };
 
   const {
     data: recipes,
-    meta: {
-      pagination,
-    }
+    meta: { pagination },
   } = data!;
 
   return (
     <div>
       <div className={classes.filters}>
-          <form
-            className={classes.search}
-            onSubmit={handleSearch}
-          >
-            <Input
-              ref={searchInputRef}
-              className={classes.searchInput}
-              placeholder="Enter dishes"
-            />
-            <Button
-             type="submit"
-            >
-              <SearchIcon/>
-            </Button>
-          </form>
+        <form className={classes.search} onSubmit={handleSearch}>
+          <Input ref={searchInputRef} className={classes.searchInput} placeholder="Enter dishes" />
+          <Button type="submit">
+            <SearchIcon />
+          </Button>
+        </form>
       </div>
       <ul className={classes.list}>
         {recipes.map((recipe) => (
-          <li
-            key={recipe.documentId}
-            className={classes.item}
-          >
+          <li key={recipe.documentId} className={classes.item}>
             <Card
               className={classes.card}
               image={recipe.images[0]?.formats.thumbnail?.url}
               captionSlot={recipe.cookingTime}
               title={recipe.name}
-              subtitle={recipe.summary}
+              subtitle={<RawText text={recipe.summary} />}
               contentSlot={recipe.calories}
               onClick={() => {
-                navigate(`/${recipe.documentId}`)
+                navigate(`/${recipe.documentId}`);
               }}
             />
           </li>
         ))}
       </ul>
       <div className={classes.pagination}>
-        <Pagination
-          currentPage={page}
-          totalPages={pagination.pageCount}
-          onChange={setPage}
-        />
+        <Pagination currentPage={page} totalPages={pagination.pageCount} onChange={setPage} />
       </div>
     </div>
   );

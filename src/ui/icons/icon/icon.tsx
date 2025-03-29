@@ -4,17 +4,12 @@ import cn from 'classnames';
 import classes from './icon.module.css';
 
 export type IconProps = React.SVGAttributes<SVGElement> & {
-    className?: string;
-    color?: 'primary' | 'secondary' | 'accent';
+  className?: string;
+  color?: 'primary' | 'secondary' | 'accent';
 };
 
 const Icon: React.FC<React.PropsWithChildren<IconProps>> = (props) => {
-  const {
-    className,
-    color,
-    children,
-    ...svgProps
-  } = props;
+  const { className, color, children, ...svgProps } = props;
 
   return (
     <svg
@@ -36,6 +31,6 @@ const Icon: React.FC<React.PropsWithChildren<IconProps>> = (props) => {
       {children}
     </svg>
   );
-}
+};
 
 export default Icon;

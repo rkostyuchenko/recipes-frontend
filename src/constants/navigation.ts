@@ -1,7 +1,7 @@
 const NAVIGATION_ITEMS = [
   {
     text: 'Recipes',
-    anchor: '/'
+    anchor: '/',
   },
 ];
 

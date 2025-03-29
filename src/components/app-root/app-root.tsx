@@ -5,8 +5,6 @@ import 'styles/global.scss';
 import 'styles/colors.scss';
 import 'styles/sizes.scss';
 
-const AppRoot = () => (
-  <AppRoutes/>
-);
+const AppRoot = () => <AppRoutes />;
 
 export default AppRoot;

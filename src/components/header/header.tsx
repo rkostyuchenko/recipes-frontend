@@ -7,10 +7,8 @@ import classes from './header.module.scss';
 
 const Header = () => (
   <header className={classes.header}>
-    <HeaderLogo className={classes.logo}/>
-    <HeaderNavigation
-      items={NAVIGATION_ITEMS}
-    />
+    <HeaderLogo className={classes.logo} />
+    <HeaderNavigation items={NAVIGATION_ITEMS} />
   </header>
 );
 

@@ -5,9 +5,9 @@ import DefaultLayout from 'layouts/default-layout';
 
 const AppRoutes = () => (
   <Routes>
-    <Route element={<DefaultLayout/>}>
-      <Route path="/" element={<RecipesPage/>}/>
-      <Route path="/:recipeId" element={<RecipePage/>}/>
+    <Route element={<DefaultLayout />}>
+      <Route path="/" element={<RecipesPage />} />
+      <Route path="/:recipeId" element={<RecipePage />} />
     </Route>
   </Routes>
 );
