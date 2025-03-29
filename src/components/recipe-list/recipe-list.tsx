@@ -116,7 +116,7 @@ const RecipeList = () => {
               subtitle={recipe.summary}
               contentSlot={recipe.calories}
               onClick={() => {
-                navigate(`/recipes/${recipe.documentId}`)
+                navigate(`/${recipe.documentId}`)
               }}
             />
           </li>
