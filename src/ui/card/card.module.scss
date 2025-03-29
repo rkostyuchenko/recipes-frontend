@@ -5,6 +5,8 @@
   max-width: 360px;
   background-color: var(--card-bg);
   cursor: pointer;
+  border-radius: var(--border-radius);
+  overflow: hidden;
 }
 
 .card:hover {

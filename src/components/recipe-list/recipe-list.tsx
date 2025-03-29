@@ -4,6 +4,8 @@ import Input from 'ui/input';
 import Button from 'ui/button';
 import SearchIcon from 'ui/icons/search-icon';
 import RawText from 'components/raw-text';
+import Text from 'ui/text';
+import ClockIcon from 'ui/icons/clock-icon';
 
 import { useRef } from 'react';
 import { useNavigate } from 'react-router';
@@ -94,10 +96,21 @@ const RecipeList = () => {
             <Card
               className={classes.card}
               image={recipe.images[0]?.formats.thumbnail?.url}
-              captionSlot={recipe.cookingTime}
+              captionSlot={
+                <>
+                  <ClockIcon className={classes.cookingTimeIcon} width={12} height={12} color="accent" />
+                  <Text weight="medium" tag="span">
+                    {`${recipe.cookingTime} minutes`}
+                  </Text>
+                </>
+              }
               title={recipe.name}
               subtitle={<RawText text={recipe.summary} />}
-              contentSlot={recipe.calories}
+              contentSlot={
+                <Text view="p-18" color="accent" weight="bold" tag="span">
+                  {`${recipe.calories} kcal`}
+                </Text>
+              }
               onClick={() => {
                 navigate(`/${recipe.documentId}`);
               }}
