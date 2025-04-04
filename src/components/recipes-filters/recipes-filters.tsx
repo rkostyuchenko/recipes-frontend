@@ -1,69 +1,57 @@
 import Input from 'ui/input';
 import Button from 'ui/button';
-import MultiDropdown, { Option } from 'ui/multi-dropdown';
 import SearchIcon from 'ui/icons/search-icon';
 
-import { useRef } from 'react';
-import MEAL_TYPES from 'constants/meal-types';
+import { observer } from 'mobx-react-lite';
+import { createContext, useEffect, useRef } from 'react';
+import { useContextSafely } from 'hooks/use-context-safely';
+import { FiltersStore } from 'stores/filters';
+import { RecipeFiltersValues } from './types';
 
 import classes from './recipes-filters.module.scss';
+import MealCategorySelect from './meal-category-select';
 
-interface Props {
-  onSearchChange: (search: string) => void;
-  mealType: MEAL_TYPES[];
-  onMealTypeChange: (value: Option[]) => void;
-}
-
-const makeMealTypeOption = (mealType: MEAL_TYPES) => ({
-  key: mealType,
-  value: mealType,
-});
-
-const mealTypeOptions = Object.values(MEAL_TYPES).map(makeMealTypeOption);
-
-const getMealTypeTitle = (value: Option[]) => {
-  if (!value.length) {
-    return 'Categories';
-  }
-
-  return value.map(({ value }) => value).join(', ');
-};
-
-const RecipesFilters: React.FC<Props> = (props) => {
-  const { onSearchChange, mealType, onMealTypeChange } = props;
+const RecipesFilters: React.FC = observer(() => {
+  const { filters } = useContextSafely(RecipesFiltersContext);
+  const { name } = filters;
 
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   const handleSearch = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!searchInputRef.current) {
-      return;
+    if (searchInputRef.current) {
+      name.setValue(searchInputRef.current.value);
     }
-
-    const search = searchInputRef.current?.value;
-
-    onSearchChange(search);
   };
+
+  useEffect(() => {
+    if (!name.value && searchInputRef.current) {
+      searchInputRef.current.value = '';
+    }
+  }, [name.value]);
 
   return (
     <form className={classes.filters} onSubmit={handleSearch}>
       <div className={classes.searchRow}>
-        <Input ref={searchInputRef} className={classes.searchInput} placeholder="Enter dishes" />
+        <Input
+          ref={searchInputRef}
+          className={classes.searchInput}
+          placeholder="Enter dishes"
+          defaultValue={name.value}
+        />
         <Button type="submit">
           <SearchIcon />
         </Button>
       </div>
       <div className={classes.fieldsRow}>
-        <MultiDropdown
-          options={mealTypeOptions}
-          value={mealType.map(makeMealTypeOption)}
-          onChange={onMealTypeChange}
-          getTitle={getMealTypeTitle}
-        />
+        <MealCategorySelect />
       </div>
     </form>
   );
-};
+});
 
 export default RecipesFilters;
+
+export const RecipesFiltersContext = createContext<FiltersStore<RecipeFiltersValues> | undefined>(undefined);
+RecipesFiltersContext.displayName = 'RecipesFiltersContext';
