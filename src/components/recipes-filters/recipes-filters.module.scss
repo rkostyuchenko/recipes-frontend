@@ -12,3 +12,9 @@
   flex-grow: 1;
   margin: 0 var(--space-l) 0 0; 
 }
+
+.fieldsRow {
+  display: grid;
+  justify-content: end;
+  grid-auto-columns: 300px;
+}

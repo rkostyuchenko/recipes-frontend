@@ -3,6 +3,8 @@ import Pagination from 'components/pagination';
 import RawText from 'components/raw-text';
 import Text from 'ui/text';
 import ClockIcon from 'ui/icons/clock-icon';
+import RecipesFilters from 'components/recipes-filters';
+import { Option } from 'ui/multi-dropdown';
 
 import { useNavigate } from 'react-router';
 import useRequest from 'hooks/use-request';
@@ -10,7 +12,6 @@ import useQueryParam from 'hooks/use-query-param';
 import qs from 'qs';
 
 import classes from './recipe-list.module.scss';
-import RecipesFilters from 'components/recipes-filters';
 
 type ImageFormat = 'thumbnail' | 'medium' | 'large';
 
@@ -38,6 +39,7 @@ const RecipeList = () => {
 
   const [page, setPage] = useQueryParam('page', 1);
   const [search, setSearch] = useQueryParam('q', '');
+  const [mealType, setMealType] = useQueryParam('meal_type', []);
 
   const query = qs.stringify({
     populate: ['images'],
@@ -67,6 +69,10 @@ const RecipeList = () => {
     setPage(1);
   };
 
+  const handleMealTypeChange = (value: Option[]) => {
+    setMealType(value.map(({ value }) => value));
+  };
+
   const {
     data: recipes,
     meta: { pagination },
@@ -74,7 +80,7 @@ const RecipeList = () => {
 
   return (
     <div>
-      <RecipesFilters onSearchChange={handleSearch} />
+      <RecipesFilters onSearchChange={handleSearch} mealType={mealType} onMealTypeChange={handleMealTypeChange} />
       <ul className={classes.list}>
         {recipes.map((recipe) => (
           <li key={recipe.documentId} className={classes.item}>
