@@ -1,9 +1,8 @@
 .input {
   display: flex;
-  padding: var(--space-s) var(--space-xs);
   border: 1px solid transparent;
   background-color: #fff;
-
+  padding: 0 var(--space-xs) 0 0;
   --input-placeholder: #afadb5;
 }
 
@@ -12,6 +11,7 @@
 }
 
 .control {
+  padding: var(--space-s) var(--space-xs);
   border: 0;
   font-size: 16px;
   line-height: 20px;
