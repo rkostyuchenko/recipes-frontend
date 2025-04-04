@@ -1,19 +1,16 @@
 import Card from 'ui/card';
 import Pagination from 'components/pagination';
-import Input from 'ui/input';
-import Button from 'ui/button';
-import SearchIcon from 'ui/icons/search-icon';
 import RawText from 'components/raw-text';
 import Text from 'ui/text';
 import ClockIcon from 'ui/icons/clock-icon';
 
-import { useRef } from 'react';
 import { useNavigate } from 'react-router';
 import useRequest from 'hooks/use-request';
 import useQueryParam from 'hooks/use-query-param';
 import qs from 'qs';
 
 import classes from './recipe-list.module.scss';
+import RecipesFilters from 'components/recipes-filters';
 
 type ImageFormat = 'thumbnail' | 'medium' | 'large';
 
@@ -41,7 +38,6 @@ const RecipeList = () => {
 
   const [page, setPage] = useQueryParam('page', 1);
   const [search, setSearch] = useQueryParam('q', '');
-  const searchInputRef = useRef<HTMLInputElement>(null);
 
   const query = qs.stringify({
     populate: ['images'],
@@ -66,11 +62,7 @@ const RecipeList = () => {
     return null;
   }
 
-  const handleSearch = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    const search = searchInputRef.current?.value;
-
+  const handleSearch = (search: string) => {
     setSearch(search);
     setPage(1);
   };
@@ -82,14 +74,7 @@ const RecipeList = () => {
 
   return (
     <div>
-      <div className={classes.filters}>
-        <form className={classes.search} onSubmit={handleSearch}>
-          <Input ref={searchInputRef} className={classes.searchInput} placeholder="Enter dishes" />
-          <Button type="submit">
-            <SearchIcon />
-          </Button>
-        </form>
-      </div>
+      <RecipesFilters onSearchChange={handleSearch} />
       <ul className={classes.list}>
         {recipes.map((recipe) => (
           <li key={recipe.documentId} className={classes.item}>
