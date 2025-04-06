@@ -1,6 +1,6 @@
 import qs from 'qs';
 import * as apiRequest from 'utils/api-request';
-import { Recipe } from 'domain/recipes';
+import { Recipe, RecipeDetails, RecipeId } from 'domain/recipes';
 
 export interface FetchListParams {
   filters?: {
@@ -40,6 +40,13 @@ const recipesApi = {
     });
 
     return apiRequest.get<Recipe[]>(`/recipes?${query}`);
+  },
+  fetchRecipe(id: RecipeId) {
+    const query = qs.stringify({
+      populate: ['ingradients', 'equipments', 'directions.image', 'images', 'category'],
+    });
+
+    return apiRequest.get<RecipeDetails>(`/recipes/${id}?${query}`);
   },
 };
 

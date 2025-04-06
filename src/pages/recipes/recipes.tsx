@@ -8,7 +8,7 @@ import Spacer from 'components/spacer';
 import { useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 import { observer, useLocalObservable } from 'mobx-react-lite';
-import RecipesStore from 'stores/recipes';
+import RecipesStore from '../../stores/recipes';
 import { FiltersStore, FieldStore } from 'stores/filters';
 import { useStore } from 'services/store';
 import qs from 'query-string';
