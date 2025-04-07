@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import classes from './input.module.css';
+import classes from './input.module.scss';
 
 export type InputProps = Omit<React.InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'value'> & {
   /** Значение поля */

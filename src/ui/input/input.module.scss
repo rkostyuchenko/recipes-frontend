@@ -2,7 +2,6 @@
   display: flex;
   border: 1px solid transparent;
   background-color: #fff;
-  padding: 0 var(--space-xs) 0 0;
   --input-placeholder: #afadb5;
 }
 
@@ -33,5 +32,5 @@
   display: flex;
   place-content: center;
   flex-direction: column;
-  margin: calc(-1 * var(--space-s)) 0;
+  margin: var(--space-s) var(--space-s) var(--space-s)0 ;
 }

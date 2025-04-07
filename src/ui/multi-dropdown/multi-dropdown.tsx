@@ -5,7 +5,7 @@ import ArrowDownIcon from 'ui/icons/arrow-down-icon';
 
 import cn from 'classnames';
 
-import classes from './multi-dropdown.module.css';
+import classes from './multi-dropdown.module.scss';
 
 export type Option = {
   /** Ключ варианта, используется для отправки на бек/использования в коде */
@@ -103,7 +103,7 @@ const MultiDropdown: React.FC<Props> = (props) => {
                 handleOptionClick(option);
               }}
             >
-              <Text view="p-16" tag="span">
+              <Text view="p-16" tag="div">
                 {option.value}
               </Text>
             </li>
