@@ -1,4 +1,4 @@
-import { makeAutoObservable, keys } from 'mobx';
+import { makeAutoObservable, keys, action } from 'mobx';
 
 import FieldStore from './field';
 
@@ -28,5 +28,10 @@ export class FiltersStore<T> {
     });
 
     return mapped;
+  }
+
+  @action.bound
+  clearFilters() {
+    (Object.values(this._filters) as Filters<T>[keyof T][]).forEach((field) => field.resetValue());
   }
 }

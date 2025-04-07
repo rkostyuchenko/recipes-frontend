@@ -4,6 +4,7 @@ import { PageSection, PageMargin } from 'components/page';
 import Banner from 'components/banner';
 import Text from 'ui/text';
 import Spacer from 'components/spacer';
+import NoRecipesMessage from 'components/no-recipes-message';
 
 import { useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
@@ -55,8 +56,8 @@ const RecipesPage: React.FC = observer(() => {
   const recipeFiltersStore = useLocalObservable(
     () =>
       new FiltersStore<RecipeFiltersValues>({
-        name: new FieldStore(name),
-        category: new FieldStore(normalizedCategory),
+        name: new FieldStore('', name),
+        category: new FieldStore([], normalizedCategory),
       }),
   );
 
@@ -96,12 +97,16 @@ const RecipesPage: React.FC = observer(() => {
                 <RecipesFilters />
               </RecipesFiltersContext>
               <Spacer top={48}>
-                <RecipeList
-                  recipes={recipesStore.recipes}
-                  currentPage={recipesStore.pagination.pageNumber}
-                  totalPages={recipesStore.pageCount}
-                  onPageChange={handlePageChange}
-                />
+                {recipesStore.recipes.length ? (
+                  <RecipeList
+                    recipes={recipesStore.recipes}
+                    currentPage={recipesStore.pagination.pageNumber}
+                    totalPages={recipesStore.pageCount}
+                    onPageChange={handlePageChange}
+                  />
+                ) : (
+                  <NoRecipesMessage onClearFiltersClick={recipeFiltersStore.clearFilters} />
+                )}
               </Spacer>
             </Spacer>
           )}

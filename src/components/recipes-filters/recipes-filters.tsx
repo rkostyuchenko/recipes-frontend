@@ -8,8 +8,9 @@ import { useContextSafely } from 'hooks/use-context-safely';
 import { FiltersStore } from 'stores/filters';
 import { RecipeFiltersValues } from './types';
 
-import classes from './recipes-filters.module.scss';
 import MealCategorySelect from './meal-category-select';
+
+import classes from './recipes-filters.module.scss';
 
 const RecipesFilters: React.FC = observer(() => {
   const { filters } = useContextSafely(RecipesFiltersContext);
@@ -25,11 +26,13 @@ const RecipesFilters: React.FC = observer(() => {
     }
   };
 
+  const nameFilterValue = name.value;
+
   useEffect(() => {
-    if (!name.value && searchInputRef.current) {
-      searchInputRef.current.value = '';
+    if (nameFilterValue == '' && searchInputRef.current) {
+      searchInputRef.current.value = nameFilterValue;
     }
-  }, [name.value]);
+  }, [nameFilterValue]);
 
   return (
     <form className={classes.filters} onSubmit={handleSearch}>
