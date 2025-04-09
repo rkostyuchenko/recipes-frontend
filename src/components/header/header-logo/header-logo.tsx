@@ -1,4 +1,4 @@
-import Logo from './header-logo.svg?react';
+import Logo from './header-logo.svg';
 import Text from 'ui/text';
 import { Link } from 'react-router';
 

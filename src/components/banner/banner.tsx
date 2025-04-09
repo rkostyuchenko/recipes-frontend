@@ -1,5 +1,5 @@
 import { PageMargin } from 'components/page';
-import Caption from './banner.assets/caption.svg?react';
+import Caption from './banner.assets/caption.svg';
 
 import classes from './banner.module.scss';
 
