@@ -1,80 +1,43 @@
 import { PageMargin, PageSection } from 'components/page';
 import RecipeCard from 'components/recipe-card';
 
+import { useEffect } from 'react';
+import { observer, useLocalObservable } from 'mobx-react-lite';
 import { useParams } from 'react-router';
-import useRequest from 'hooks/use-request';
-import qs from 'qs';
+import RecipeStore from 'stores/recipe';
 
-type Ingredient = {
-  id: number;
-  name: string;
-  amount: number;
-  unit: string;
-};
-
-type Direction = {
-  description: string;
-};
-
-type RecipeImage = {
-  url: string;
-};
-
-type RecipeEquipment = {
-  id: number;
-  name: string;
-};
-
-type Recipe = {
-  name: string;
-  likes: number;
-  cookingTime: number;
-  totalTime: number;
-  preparationTime: number;
-  servings: number;
-  rating: number;
-  images: RecipeImage[];
-  summary: string;
-  ingradients: Ingredient[]; // ingrAdients
-  equipments: RecipeEquipment[];
-  directions: Direction[];
-};
-
-const RecipePage = () => {
+const RecipePage = observer(() => {
   const { recipeId } = useParams();
+  const recipeStore = useLocalObservable(() => new RecipeStore());
 
-  const query = qs.stringify({
-    populate: ['ingradients', 'equipments', 'directions.image', 'images', 'category'],
-  });
+  useEffect(() => {
+    recipeStore.fetchRecipe(recipeId!);
+  }, [recipeId]);
 
-  const { isFetching, data, error } = useRequest<Recipe>(`/recipes/${recipeId}?${query}`);
-
-  if (error) {
-    return null;
-  }
+  const { recipe, isCompleted } = recipeStore;
 
   return (
     <PageSection>
       <PageMargin>
-        {!isFetching && data && (
+        {isCompleted && recipe && (
           <RecipeCard
-            name={data.data.name}
-            preparationTime={`${data.data.preparationTime} minutes`}
-            cookingTime={`${data.data.cookingTime} minutes`}
-            totalTime={`${data.data.totalTime} minutes`}
-            likes={data.data.likes}
-            servings={`${data.data.servings} servings`}
-            rating={`${data.data.rating} / 5`}
-            summary={data.data.summary}
-            ingredients={data.data.ingradients.map(({ name, amount, unit }) => `${amount} ${unit} ${name}`)}
-            equipments={data.data.equipments.map(({ name }) => name)}
-            directions={data.data.directions.map(({ description }) => description)}
-            imageUrl={data.data.images[0]?.url}
+            name={recipe.name}
+            preparationTime={`${recipe.preparationTime} minutes`}
+            cookingTime={`${recipe.cookingTime} minutes`}
+            totalTime={`${recipe.totalTime} minutes`}
+            likes={recipe.likes}
+            servings={`${recipe.servings} servings`}
+            rating={`${recipe.rating} / 5`}
+            summary={recipe.summary}
+            ingredients={recipe.ingradients.map(({ name, amount, unit }) => `${amount} ${unit} ${name}`)}
+            equipments={recipe.equipments.map(({ name }) => name)}
+            directions={recipe.directions.map(({ description }) => description)}
+            imageUrl={recipe.images[0]?.url}
           />
         )}
       </PageMargin>
     </PageSection>
   );
-};
+});
 
 export default RecipePage;
