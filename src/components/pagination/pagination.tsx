@@ -9,7 +9,7 @@ interface Props {
 }
 
 const visibleSiblings = 2;
-const clamp = '...';
+const clamp = '...' as const;
 
 const makePagesList = (currentPage: number, totalPages: number) => {
   const pages = [];
@@ -23,7 +23,7 @@ const makePagesList = (currentPage: number, totalPages: number) => {
     }
   }
 
-  const result = [];
+  const result: Array<number | typeof clamp> = [];
   let prev: number;
 
   pages.forEach((page) => {

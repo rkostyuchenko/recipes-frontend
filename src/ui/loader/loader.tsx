@@ -1,7 +1,7 @@
 import React from 'react';
 import cn from 'classnames';
 
-import classes from './loader.module.css';
+import classes from './loader.module.scss';
 
 export type Props = {
   /** Размер */

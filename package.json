@@ -2,10 +2,11 @@
   "name": "recipes-frontend",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
   "scripts": {
+    "dev": "NODE_ENV=development webpack serve --config config/webpack/webpack.config.js",
+    "build": "NODE_ENV=production tsc -b && webpack --config config/webpack/webpack.config.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "axios": "1.8.4",
@@ -19,10 +20,19 @@
     "react-router": "7.4.0"
   },
   "devDependencies": {
+    "@babel/plugin-proposal-decorators": "7.25.9",
+    "@babel/preset-env": "7.26.9",
+    "@babel/preset-react": "7.26.3",
+    "@babel/preset-typescript": "^7.27.0",
     "@eslint/js": "9.21.0",
+    "@pmmmwh/react-refresh-webpack-plugin": "0.5.16",
+    "@svgr/webpack": "8.1.0",
     "@types/qs": "6.9.18",
     "@types/react": "19.0.10",
     "@types/react-dom": "19.0.4",
+    "babel-loader": "10.0.0",
+    "css-loader": "7.1.2",
+    "dotenv-webpack": "8.1.0",
     "eslint": "9.21.0",
     "eslint-config-prettier": "10.1.1",
     "eslint-import-resolver-typescript": "4.2.7",
@@ -33,9 +43,21 @@
     "eslint-plugin-react-refresh": "0.4.19",
     "eslint-plugin-react-x": "1.38.4",
     "globals": "15.15.0",
+    "html-webpack-plugin": "5.6.3",
+    "install": "0.13.0",
+    "mini-css-extract-plugin": "2.9.2",
+    "npm": "11.3.0",
     "prettier": "3.5.3",
+    "process": "0.11.10",
+    "react-refresh": "0.17.0",
+    "sass": "1.86.3",
     "sass-embedded": "1.86.0",
+    "sass-loader": "16.0.5",
+    "style-loader": "4.0.0",
     "typescript": "5.7.2",
-    "typescript-eslint": "8.24.1"
+    "typescript-eslint": "8.24.1",
+    "webpack": "5.99.5",
+    "webpack-cli": "6.0.1",
+    "webpack-dev-server": "5.2.1"
   }
 }

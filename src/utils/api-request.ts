@@ -2,7 +2,9 @@ import axios, { AxiosResponse } from 'axios';
 
 const STRAPI_BASE_URL = 'https://front-school-strapi.ktsdev.ru';
 const STRAPI_URL = `${STRAPI_BASE_URL}/api`;
-const API_TOKEN = import.meta.env.VITE_API_TOKEN;
+const API_TOKEN = import.meta.env.API_TOKEN;
+
+console.debug(API_TOKEN);
 
 type Pagination = {
   page: number;
