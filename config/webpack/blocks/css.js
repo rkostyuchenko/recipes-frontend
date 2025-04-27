@@ -15,7 +15,7 @@ module.exports = ({ NODE_ENV, isEnvProduction, isEnvDevelopment }) => ({
             options: {
               importLoaders: 1,
               modules: {
-                localIdentName: '[name]__[local]--[hash:base64:5]',
+                localIdentName: isEnvProduction ? '[hash:base64]' : '[name]__[local]--[hash:base64:5]',
               },
               esModule: false,
               sourceMap: isEnvDevelopment,
