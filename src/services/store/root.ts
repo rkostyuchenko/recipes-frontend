@@ -1,12 +1,13 @@
-import { makeAutoObservable } from 'mobx';
 import MealCategoriesStore from 'stores/meal-categories';
+import RecipeSuggestStore from 'stores/recipe-suggest';
 
 export class RootStore {
   mealCategories: MealCategoriesStore;
+  recipeSuggest: RecipeSuggestStore;
 
   constructor() {
-    makeAutoObservable(this);
     this.mealCategories = new MealCategoriesStore();
+    this.recipeSuggest = new RecipeSuggestStore();
   }
 }
 

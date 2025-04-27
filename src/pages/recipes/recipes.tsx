@@ -9,7 +9,7 @@ import NoRecipesMessage from 'components/no-recipes-message';
 import { useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 import { observer, useLocalObservable } from 'mobx-react-lite';
-import RecipesStore from '../../stores/recipes';
+import RecipesStore from 'stores/recipes';
 import { FiltersStore, FieldStore } from 'stores/filters';
 import { useStore } from 'services/store';
 import qs from 'query-string';
@@ -85,7 +85,9 @@ const RecipesPage: React.FC = observer(() => {
 
   return (
     <>
-      <Banner />
+      <PageMargin>
+        <Banner />
+      </PageMargin>
       <PageSection>
         <PageMargin>
           <Text view="p-20" align="center">

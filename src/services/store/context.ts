@@ -6,7 +6,7 @@ const storeContext = createContext<RootStore | undefined>(undefined);
 storeContext.displayName = 'StoreContext';
 export const StoreProvider = storeContext.Provider;
 
-export const useStore = (store: GlobalStores) => {
+export const useStore = <StoreName extends GlobalStores>(store: StoreName) => {
   const rootStore = useContextSafely(storeContext);
 
   return rootStore[store];
