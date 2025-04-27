@@ -1,8 +1,6 @@
 import RecipeList from 'components/recipe-list';
 import RecipesFilters, { RecipeFiltersValues, RecipesFiltersContext } from 'components/recipes-filters';
 import { PageSection, PageMargin } from 'components/page';
-import Banner from 'components/banner';
-import Text from 'ui/text';
 import Spacer from 'components/spacer';
 import NoRecipesMessage from 'components/no-recipes-message';
 
@@ -88,37 +86,29 @@ const RecipesPage: React.FC = observer(() => {
   });
 
   return (
-    <>
+    <PageSection>
       <PageMargin>
-        <Banner />
-      </PageMargin>
-      <PageSection>
-        <PageMargin>
-          <Text view="p-20" align="center">
-            Find the perfect food and drink ideas for every occasion, from weeknight dinners to holiday feasts.
-          </Text>
-          {recipesStore.isCompleted && (
+        {recipesStore.isCompleted && (
+          <Spacer top={48}>
+            <RecipesFiltersContext value={recipeFiltersStore}>
+              <RecipesFilters />
+            </RecipesFiltersContext>
             <Spacer top={48}>
-              <RecipesFiltersContext value={recipeFiltersStore}>
-                <RecipesFilters />
-              </RecipesFiltersContext>
-              <Spacer top={48}>
-                {recipesStore.recipes.length ? (
-                  <RecipeList
-                    recipes={recipesStore.recipes}
-                    currentPage={recipesStore.pagination.pageNumber}
-                    totalPages={recipesStore.pageCount}
-                    onPageChange={handlePageChange}
-                  />
-                ) : (
-                  <NoRecipesMessage onClearFiltersClick={clearFilters} />
-                )}
-              </Spacer>
+              {recipesStore.recipes.length ? (
+                <RecipeList
+                  recipes={recipesStore.recipes}
+                  currentPage={recipesStore.pagination.pageNumber}
+                  totalPages={recipesStore.pageCount}
+                  onPageChange={handlePageChange}
+                />
+              ) : (
+                <NoRecipesMessage onClearFiltersClick={clearFilters} />
+              )}
             </Spacer>
-          )}
-        </PageMargin>
-      </PageSection>
-    </>
+          </Spacer>
+        )}
+      </PageMargin>
+    </PageSection>
   );
 });
 
