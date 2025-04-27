@@ -47,6 +47,7 @@
     "install": "0.13.0",
     "mini-css-extract-plugin": "2.9.2",
     "npm": "11.3.0",
+    "postcss-custom-media": "11.0.5",
     "prettier": "3.5.3",
     "process": "0.11.10",
     "react-refresh": "0.17.0",
