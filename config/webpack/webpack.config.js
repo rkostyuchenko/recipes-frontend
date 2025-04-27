@@ -35,7 +35,9 @@ module.exports = merge(
       new webpack.ProvidePlugin({
         process: 'process/browser.js',
       }),
-      new HtmlWebPackPlugin(),
+      new HtmlWebPackPlugin({
+        favicon: path.join(projectRoot, 'src/favicon.svg'),
+      }),
       new Dotenv({
         prefix: 'import.meta.env.',
       }),
