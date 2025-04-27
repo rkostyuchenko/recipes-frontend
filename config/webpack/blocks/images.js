@@ -9,9 +9,17 @@ module.exports = () => ({
       },
       {
         test: /\.svg$/i,
-        use: [
+        oneOf: [
           {
-            loader: require.resolve('@svgr/webpack'),
+            issuer: /\.(ts|tsx)$/i,
+            use: [
+              {
+                loader: require.resolve('@svgr/webpack'),
+              },
+            ],
+          },
+          {
+            type: 'asset/resource',
           },
         ],
       },
