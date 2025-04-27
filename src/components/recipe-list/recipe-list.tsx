@@ -1,11 +1,11 @@
+import Link from 'ui/link';
 import Card from 'ui/card';
 import Pagination from 'components/pagination';
 import RawText from 'components/raw-text';
 import Text from 'ui/text';
 import ClockIcon from 'ui/icons/clock-icon';
+import SaveButton from './save-button';
 
-import { observer } from 'mobx-react-lite';
-import { useNavigate } from 'react-router';
 import { Recipe } from 'domain/recipes';
 
 import classes from './recipe-list.module.scss';
@@ -17,10 +17,8 @@ interface Props {
   onPageChange(page: number): void;
 }
 
-const RecipeList: React.FC<Props> = observer((props) => {
+const RecipeList: React.FC<Props> = (props) => {
   const { recipes, currentPage, totalPages, onPageChange } = props;
-
-  const navigate = useNavigate();
 
   return (
     <div>
@@ -38,16 +36,18 @@ const RecipeList: React.FC<Props> = observer((props) => {
                   </Text>
                 </>
               }
-              title={recipe.name}
+              title={
+                <Link to={`/${recipe.documentId}`} overlay>
+                  {recipe.name}
+                </Link>
+              }
               subtitle={<RawText text={recipe.summary} />}
               contentSlot={
                 <Text view="p-18" color="accent" weight="bold" tag="span">
                   {`${recipe.calories} kcal`}
                 </Text>
               }
-              onClick={() => {
-                navigate(`/${recipe.documentId}`);
-              }}
+              actionSlot={<SaveButton recipeId={recipe.documentId} />}
             />
           </li>
         ))}
@@ -59,6 +59,6 @@ const RecipeList: React.FC<Props> = observer((props) => {
       )}
     </div>
   );
-});
+};
 
 export default RecipeList;

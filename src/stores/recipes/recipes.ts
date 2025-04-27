@@ -36,7 +36,7 @@ class RecipesStore implements BaseDataProvider {
     return this._pageCount;
   }
 
-  @action
+  @action.bound
   async fetchRecipesList(filters?: FetchListParams['filters']) {
     let response: Response<Recipe[]>;
 

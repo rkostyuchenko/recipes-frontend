@@ -61,19 +61,23 @@ const RecipesPage: React.FC = observer(() => {
       }),
   );
 
-  const { updateParams } = recipesStore.pagination;
-  const { filterValues } = recipeFiltersStore;
+  const { fetchRecipesList, pagination } = recipesStore;
+  const { filterValues, clearFilters } = recipeFiltersStore;
 
   useEffect(() => {
     mealCategoriesStore.fetchMealCategoriesList();
   }, []);
 
   useEffect(() => {
-    recipesStore.fetchRecipesList(filterValues);
-  }, [recipesStore.pagination.pageNumber, filterValues]);
+    fetchRecipesList(filterValues);
+  }, [pagination.pageNumber, filterValues]);
+
+  useEffect(() => {
+    console.debug('filterValues changed');
+  }, [filterValues]);
 
   const handlePageChange = (page: number) => {
-    updateParams({
+    pagination.updateParams({
       pageNumber: page,
     });
   };
@@ -107,7 +111,7 @@ const RecipesPage: React.FC = observer(() => {
                     onPageChange={handlePageChange}
                   />
                 ) : (
-                  <NoRecipesMessage onClearFiltersClick={recipeFiltersStore.clearFilters} />
+                  <NoRecipesMessage onClearFiltersClick={clearFilters} />
                 )}
               </Spacer>
             </Spacer>

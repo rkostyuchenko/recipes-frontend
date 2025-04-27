@@ -1,3 +1,6 @@
+import { Link } from 'react-router';
+import IconButton from 'ui/icon-button';
+import HeartIcon from 'ui/icons/heart-icon';
 import HeaderNavigation from './header-navigation';
 import HeaderLogo from './header-logo';
 
@@ -13,6 +16,11 @@ const Header = () => (
         <HeaderNavigation className={classes.menu} items={NAVIGATION_ITEMS} />
       </div>
     </nav>
+    <div className={classes.actionsWrap}>
+      <IconButton as={Link} label="Favorites" to="/favorites">
+        <HeartIcon />
+      </IconButton>
+    </div>
   </header>
 );
 

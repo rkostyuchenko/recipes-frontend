@@ -2,11 +2,13 @@ import qs from 'qs';
 import * as apiRequest from 'utils/api-request';
 import getRandomInt from 'utils/get-random-int';
 import { Recipe, RecipeDetails, RecipeId } from 'domain/recipes';
+import { StrapiFilters } from '../types';
 
 export interface FetchListParams {
   filters?: {
     name?: string;
     category?: number[];
+    id?: RecipeId[];
   };
   page?: number;
   pageSize: number;
@@ -16,29 +18,37 @@ const recipesApi = {
   fetchRecipesList(params: FetchListParams) {
     const { filters = {}, page = 1, pageSize } = params;
 
-    const query = qs.stringify({
-      populate: ['images'],
-      pagination: {
-        page,
-        pageSize,
+    const filtersQuery: StrapiFilters = {};
+
+    if (filters.name) {
+      filtersQuery.name = {
+        $containsi: filters.name,
+      };
+    }
+
+    if (filters.category?.length) {
+      filtersQuery.category = {
+        $in: filters.category,
+      };
+    }
+
+    if (filters.id) {
+      filtersQuery.documentId = {
+        $in: filters.id,
+      };
+    }
+
+    const query = qs.stringify(
+      {
+        populate: ['images'],
+        pagination: {
+          page,
+          pageSize,
+        },
+        filters: filtersQuery,
       },
-      filters: {
-        ...(filters.name
-          ? {
-              name: {
-                $containsi: filters.name,
-              },
-            }
-          : {}),
-        ...(filters.category
-          ? {
-              category: {
-                $eq: filters.category,
-              },
-            }
-          : {}),
-      },
-    });
+      { encodeValuesOnly: true, allowEmptyArrays: true },
+    );
 
     return apiRequest.get<Recipe[]>(`/recipes?${query}`);
   },
