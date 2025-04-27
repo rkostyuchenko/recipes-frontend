@@ -6,7 +6,7 @@
     "dev": "NODE_ENV=development webpack serve --config config/webpack/webpack.config.js",
     "prebuild": "tsc -b",
     "build": "NODE_ENV=production webpack --config config/webpack/webpack.config.js",
-    "predeploy": "BASE_URL=/recipes-frontend/ yarn build", 
+    "predeploy": "BASE_URL=/recipes-frontend/ yarn build",
     "deploy": "gh-pages -d dist -b dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
@@ -52,7 +52,6 @@
     "html-webpack-plugin": "5.6.3",
     "install": "0.13.0",
     "mini-css-extract-plugin": "2.9.2",
-    "npm": "11.3.0",
     "postcss": "8.5.3",
     "postcss-custom-media": "11.0.5",
     "postcss-loader": "8.1.1",
