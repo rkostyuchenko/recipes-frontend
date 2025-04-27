@@ -1,0 +1,19 @@
+.link {
+  text-decoration: none;
+}
+
+.viewPrimary {
+  color: currentColor;
+
+  &:hover {
+    color: var(--brand);
+  }
+}
+
+.overlay {
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+}
