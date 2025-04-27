@@ -44,6 +44,7 @@
     "eslint-plugin-react-hooks": "5.1.0",
     "eslint-plugin-react-refresh": "0.4.19",
     "eslint-plugin-react-x": "1.38.4",
+    "gh-pages": "6.3.0",
     "globals": "15.15.0",
     "html-webpack-plugin": "5.6.3",
     "install": "0.13.0",
