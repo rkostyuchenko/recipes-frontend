@@ -1,0 +1,5 @@
+@use '../font.mixin' as mixins;
+
+@include mixins.font-face(Onest, './onest-regular.woff', 400);
+@include mixins.font-face(Onest, './onest-medium.woff', 500);
+@include mixins.font-face(Onest, './onest-bold.woff', 700);

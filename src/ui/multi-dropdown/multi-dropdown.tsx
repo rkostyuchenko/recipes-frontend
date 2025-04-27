@@ -103,7 +103,7 @@ const MultiDropdown: React.FC<Props> = (props) => {
                 handleOptionClick(option);
               }}
             >
-              <Text view="p-16" tag="div">
+              <Text variant="body-2" as="div">
                 {option.value}
               </Text>
             </li>

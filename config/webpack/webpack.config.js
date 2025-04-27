@@ -23,6 +23,7 @@ module.exports = merge(
     mode: environment.NODE_ENV,
     entry: './src/main.tsx',
     output: {
+      publicPath: '/',
       filename: environment.isEnvProduction ? `static/[name].[contenthash].js` : '[name].js',
       assetModuleFilename: `static/[contenthash][ext]`,
       clean: true,

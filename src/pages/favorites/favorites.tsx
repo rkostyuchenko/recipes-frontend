@@ -1,5 +1,7 @@
 import RecipeList from 'components/recipe-list';
 import { PageSection, PageMargin } from 'components/page';
+import Text from 'ui/text';
+import Spacer from 'components/spacer';
 
 import { useEffect } from 'react';
 import { observer, useLocalObservable } from 'mobx-react-lite';
@@ -20,16 +22,21 @@ const FavoritesPage = observer(() => {
   return (
     <PageSection>
       <PageMargin>
-        {recipes.length ? (
-          <RecipeList
-            recipes={recipes}
-            currentPage={pagination.pageNumber}
-            totalPages={pageCount}
-            onPageChange={() => {}}
-          />
-        ) : (
-          'empty message'
-        )}
+        <Text variant="header-2" as="h1" color="accent">
+          Favorites
+        </Text>
+        <Spacer top={32}>
+          {recipes.length ? (
+            <RecipeList
+              recipes={recipes}
+              currentPage={pagination.pageNumber}
+              totalPages={pageCount}
+              onPageChange={() => {}}
+            />
+          ) : (
+            'empty'
+          )}
+        </Spacer>
       </PageMargin>
     </PageSection>
   );

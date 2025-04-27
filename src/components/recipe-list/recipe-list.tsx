@@ -1,7 +1,6 @@
 import Link from 'ui/link';
-import Card from 'ui/card';
+import RecipeCard from 'components/recipe-card';
 import Pagination from 'components/pagination';
-import RawText from 'components/raw-text';
 import Text from 'ui/text';
 import ClockIcon from 'ui/icons/clock-icon';
 import SaveButton from './save-button';
@@ -25,7 +24,7 @@ const RecipeList: React.FC<Props> = (props) => {
       <ul className={classes.list}>
         {recipes.map((recipe) => (
           <li key={recipe.documentId} className={classes.item}>
-            <Card
+            <RecipeCard
               className={classes.card}
               image={recipe.images[0]?.formats.thumbnail?.url}
               captionSlot={
@@ -37,15 +36,9 @@ const RecipeList: React.FC<Props> = (props) => {
                 </>
               }
               title={
-                <Link to={`/${recipe.documentId}`} overlay>
+                <Link to={`/recipes/${recipe.documentId}`} overlay>
                   {recipe.name}
                 </Link>
-              }
-              subtitle={<RawText text={recipe.summary} />}
-              contentSlot={
-                <Text view="p-18" color="accent" weight="bold" tag="span">
-                  {`${recipe.calories} kcal`}
-                </Text>
               }
               actionSlot={<SaveButton recipeId={recipe.documentId} />}
             />

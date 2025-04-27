@@ -8,8 +8,12 @@
   justify-content: center;
   cursor: pointer;
 
+  &:visited {
+    color: currentColor;
+  }
+
   &:hover {
-    color: var(--brand);
+    color: var(--color-generic-brand-hover);
   }
 }
 

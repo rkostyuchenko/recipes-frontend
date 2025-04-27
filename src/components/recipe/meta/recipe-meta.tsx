@@ -1,4 +1,4 @@
-import classes from '../recipe-card.module.scss';
+import classes from '../recipe.module.scss';
 
 const RecipeMeta: React.FC<React.PropsWithChildren> = ({ children }) => {
   return <dl className={classes.meta}>{children}</dl>;

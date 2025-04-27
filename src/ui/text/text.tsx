@@ -7,9 +7,9 @@ export type Props = {
   /** Дополнительный класс */
   className?: string;
   /** Стиль отображения */
-  view?: 'title' | 'button' | 'p-20' | 'p-18' | 'p-16' | 'p-14';
+  variant?: 'header-1' | 'header-2' | 'caption-1' | 'body-1' | 'body-2' | 'body-3';
   /** Html-тег */
-  tag?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'div' | 'p' | 'span';
+  as?: React.ElementType;
   /** Начертание шрифта */
   weight?: 'normal' | 'medium' | 'bold';
   /** Контент */
@@ -22,7 +22,7 @@ export type Props = {
 };
 
 const Text: React.FC<Props> = (props) => {
-  const { className, tag: Tag = 'p', view, weight, color, maxLines, align, children } = props;
+  const { className, as: Tag = 'p', variant, weight, color, maxLines, align, children } = props;
 
   return (
     <Tag
@@ -30,12 +30,12 @@ const Text: React.FC<Props> = (props) => {
         className,
         classes.text,
         {
-          [classes.viewButton]: view === 'button',
-          [classes.viewTitle]: view === 'title',
-          [classes.viewP20]: view === 'p-20',
-          [classes.viewP18]: view === 'p-18',
-          [classes.viewP16]: view === 'p-16',
-          [classes.viewP14]: view === 'p-14',
+          [classes.variantHeader1]: variant === 'header-1',
+          [classes.variantHeader2]: variant === 'header-2',
+          [classes.variantCaption1]: variant === 'caption-1',
+          [classes.variantBody1]: variant === 'body-1',
+          [classes.variantBody2]: variant === 'body-2',
+          [classes.variantBody3]: variant === 'body-3',
         },
         {
           [classes.weightNormal]: weight === 'normal',

@@ -1,3 +1,12 @@
-.section {
-  padding: 36px 0 28px;
+.section + .section {
+  margin-top: 72px;
+}
+
+.heading {
+  text-transform: uppercase;
+  font-size: 16px;
+  margin: 0 0 var(--space-5);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+  letter-spacing: 1px;
 }

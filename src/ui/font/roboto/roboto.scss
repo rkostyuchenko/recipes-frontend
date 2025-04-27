@@ -1,5 +1,0 @@
-@use '../font.mixin' as mixins;
-
-@include mixins.font-face(Roboto, './Roboto-Regular.woff2', 400);
-@include mixins.font-face(Roboto, './Roboto-Medium.woff2', 500);
-@include mixins.font-face(Roboto, './Roboto-Bold.woff2', 700);

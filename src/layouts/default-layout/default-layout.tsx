@@ -5,13 +5,15 @@ import Header from 'components/header';
 import classes from './default-layout.module.scss';
 
 const DefaultLayout = () => (
-  <div className={classes.layout}>
+  <div>
     <div className={classes.header}>
       <PageMargin>
         <Header />
       </PageMargin>
     </div>
-    <Outlet />
+    <div className={classes.body}>
+      <Outlet />
+    </div>
   </div>
 );
 

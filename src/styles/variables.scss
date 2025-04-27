@@ -1,22 +1,41 @@
 :root {
-  --brand: #B5460F;
-  --brand-hover: #B5460FB2;
-  --brand-active: #872D01;
+  --font-family-sans: Onest, sans-serif;
 
-  --text-secondary: #AFADB5;
-  --text-primary: #000;
-  --text-accent: var(--brand);
+  --color-black: 0, 0, 0;
+  --color-white: 255, 255, 255;
+  --color-red: 203, 32, 40;
+  
+  --color-brand: var(--color-red);
+  
+  --color-text-primary: rgba(var(--color-brand), .85);
+  --color-text-secondary: rgba(var(--color-black), .5);
+  --color-text-brand: var(--color-generic-brand);
+  --color-text-inverted: rgb(var(--color-white));
+  --color-text-link: var(--color-generic-brand);
+  --color-text-link-hover: var(--color-generic-brand-hover);
 
-  --space-xl: 24px;
-  --space-l: 20px;
-  --space-m: 16px;
-  --space-s: 14px;
-  --space-xs: 12px;
-  --space-xxs: 8px;
+  --color-background: rgb(var(--color-white));
 
-  --page-margin: 20px;
+  --color-generic-brand: rgb(var(--color-brand));
+  --color-generic-brand-hover: rgba(var(--color-brand), .85);
+  --color-generic-line: rgb(228, 228, 228);
+  --color-generic-disabled: rgb(217, 217, 217);
+  --color-generic-skeleton: rgb(242, 241, 234);
 
-  --border-radius: 5px;
+  --space-base: 4px;
+
+  --space-1: var(--space-base);
+  --space-2: calc(var(--space-base) * 2);
+  --space-3: calc(var(--space-base) * 3);
+  --space-4: calc(var(--space-base) * 4);
+  --space-5: calc(var(--space-base) * 5);
+  --space-6: calc(var(--space-base) * 6);
+  --space-7: calc(var(--space-base) * 7);
+  --space-8: calc(var(--space-base) * 8);
+  --space-9: calc(var(--space-base) * 9);
+  --space-10: calc(var(--space-base) * 10);
+
+  --page-margin: var(--space-6);
 
   @media (--small-viewport) {
     --page-margin: 6%;

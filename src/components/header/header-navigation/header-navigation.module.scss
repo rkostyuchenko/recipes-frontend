@@ -6,14 +6,11 @@
 
 .item {
   display: inline-block;
-  font-size: 22px;
-
-  @media (--medium-viewport) {
-    font-size: 16px;
-  }
+  font-size: 18px;
+  font-weight: 500;
 
   &:not(:last-child) {
-    margin-right: 30px;
+    margin-right: var(--space-7);
   }
 
   &:last-child {
@@ -25,10 +22,16 @@
   }
 }
 
-.link {
+.link,
+.link:visited {
+  color: currentColor;
   text-decoration: none;
 }
 
+.link:hover {
+  color: var(--color-text-link-hover);
+}
+
 .link.active {
-  color: var(--brand);
+  color: var(--color-text-brand);
 }

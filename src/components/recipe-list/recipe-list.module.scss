@@ -1,20 +1,17 @@
 .list {
   padding: 0;
   margin: 0;
+  --gutter: var(--space-6);
 
   @media (--small-viewport) {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-xl);
+    gap: var(--gutter);
   }
 
   @media (--medium-viewport) {
     grid-template-columns: repeat(3, 1fr);
     display: grid;
-  }
-
-  @media (--large-viewport) {
-    gap: 80px;
   }
 }
 
@@ -22,7 +19,7 @@
   display: block;
 
   &:not(:last-child) {
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--gutter);
 
     @media (--small-viewport) {
       margin-bottom: 0;

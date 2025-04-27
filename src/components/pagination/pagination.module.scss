@@ -15,7 +15,7 @@
   line-height: 22px;
   font-size: 18px;
   font-family: inherit;
-  padding: var(--space-s) var(--space-xs);
+  padding: var(--space-1) var(--space-2);
 }
 
 .button {
@@ -24,7 +24,7 @@
   background: 0;
 
   &.active {
-    color: #fff;
-    background: var(--brand);
+    color: var(--color-text-inverted);
+    background: var(--color-generic-brand);
   }
 }

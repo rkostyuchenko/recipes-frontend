@@ -1,5 +1,5 @@
 import { PageMargin, PageSection } from 'components/page';
-import RecipeCard from 'components/recipe-card';
+import Recipe from 'components/recipe';
 
 import { useEffect } from 'react';
 import { observer, useLocalObservable } from 'mobx-react-lite';
@@ -20,7 +20,7 @@ const RecipePage = observer(() => {
     <PageSection>
       <PageMargin>
         {isCompleted && recipe && (
-          <RecipeCard
+          <Recipe
             name={recipe.name}
             preparationTime={`${recipe.preparationTime} minutes`}
             cookingTime={`${recipe.cookingTime} minutes`}

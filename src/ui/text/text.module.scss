@@ -1,3 +1,7 @@
+.text {
+  line-height: 1;
+}
+
 .text.clamped {
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -5,47 +9,46 @@
   overflow: hidden;
 }
 
-.viewButton {
+.variantBody1 {
+  font-size: 12px;
   font-size: 18px;
-  line-height: 18px;
 }
 
-.viewTitle {
-  font-size: 44px;
-  line-height: 48px;
-  font-weight: 700;
-}
-
-.viewP20 {
-  font-size: 20px;
-  line-height: 24px;
-}
-
-.viewP18 {
+.variantBody2 {
   font-size: 18px;
   line-height: 22px;
 }
 
-.viewP16 {
-  font-size: 16px;
-  line-height: 20px;
+.variantBody3 {
+  font-size: 22px;
+  font-size: 26px;
 }
 
-.viewP14 {
-  font-size: 14px;
-  line-height: 18px;
+.variantHeader1 {
+  font-size: 34px;
+  font-weight: 700;
 }
 
-.colorSecondary {
-  color: var(--text-secondary);
+.variantHeader2 {
+  font-size: 44px;
+  font-weight: 700;
+}
+
+.variantCaption1 {
+  font-size: 20px;
+  font-weight: 500;
 }
 
 .colorPrimary {
-  color: var(--text-primary);
+  color: var(--color-text-primary);
+}
+
+.colorSecondary {
+  color: var(--color-text-secondary);
 }
 
 .colorAccent {
-  color: var(--text-accent);
+  color: var(--color-text-brand);
 }
 
 .weightNormal {
@@ -58,16 +61,4 @@
 
 .weightBold {
   font-weight: 700;
-}
-
-.alignStart {
-  text-align: left;
-}
-
-.alignCenter {
-  text-align: center;
-}
-
-.alignEnd {
-  text-align: right;
 }

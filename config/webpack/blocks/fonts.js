@@ -4,7 +4,7 @@ module.exports = () => ({
   module: {
     rules: [
       {
-        test: /\.woff2$/i,
+        test: /\.woff2?$/i,
         type: 'asset/resource',
       },
     ],

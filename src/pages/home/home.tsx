@@ -17,14 +17,14 @@ const HomePage: React.FC = () => {
     <>
       <PageMargin>
         <PageSection>
-          <Text view="title">
+          <Text variant="header-2" as="h1" color="accent">
             Find the perfect food and drink ideas for every occasion, from weeknight dinners to holiday feasts.
           </Text>
           <Spacer top={32}>
             <SearchRow onSearch={handleSearch} />
           </Spacer>
         </PageSection>
-        <PageSection>
+        <PageSection title="Trending Today">
           <Banner />
         </PageSection>
       </PageMargin>

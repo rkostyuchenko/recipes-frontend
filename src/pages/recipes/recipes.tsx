@@ -3,6 +3,7 @@ import RecipesFilters, { RecipeFiltersValues, RecipesFiltersContext } from 'comp
 import { PageSection, PageMargin } from 'components/page';
 import Spacer from 'components/spacer';
 import NoRecipesMessage from 'components/no-recipes-message';
+import Text from 'ui/text';
 
 import { useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
@@ -70,10 +71,6 @@ const RecipesPage: React.FC = observer(() => {
     fetchRecipesList(filterValues);
   }, [pagination.pageNumber, filterValues]);
 
-  useEffect(() => {
-    console.debug('filterValues changed');
-  }, [filterValues]);
-
   const handlePageChange = (page: number) => {
     pagination.updateParams({
       pageNumber: page,
@@ -88,8 +85,11 @@ const RecipesPage: React.FC = observer(() => {
   return (
     <PageSection>
       <PageMargin>
+        <Text variant="header-2" as="h1" color="accent">
+          Recipes
+        </Text>
         {recipesStore.isCompleted && (
-          <Spacer top={48}>
+          <Spacer top={32}>
             <RecipesFiltersContext value={recipeFiltersStore}>
               <RecipesFilters />
             </RecipesFiltersContext>

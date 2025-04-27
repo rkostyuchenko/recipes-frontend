@@ -2,7 +2,6 @@ import React from 'react';
 import cn from 'classnames';
 
 import Loader from '../loader';
-import Text from '../text';
 
 import classes from './button.module.scss';
 
@@ -30,9 +29,7 @@ const Button: React.FC<Props> = (props) => {
       {...restProps}
     >
       {loading && <Loader className={cn(classes.loader, classes.icon)} size="s" />}
-      <Text view="button" tag="span">
-        {children}
-      </Text>
+      {children}
     </button>
   );
 };
