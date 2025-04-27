@@ -27,7 +27,7 @@ const RecipeCard: React.FC<Props> = (props) => {
         <img className={classes.image} src={image} alt="" />
       </span>
       <div className={classes.contentWrap}>
-        <Text className={classes.caption} variant="caption-1">
+        <Text className={classes.caption} variant="body-1" as="p">
           {title}
         </Text>
         {actionSlot && <span className={classes.action}>{actionSlot}</span>}

@@ -2,6 +2,7 @@ import { PageMargin, PageSection } from 'components/page';
 import Banner from 'components/banner';
 import SearchRow from 'components/search-row';
 import Text from 'ui/text';
+import MealCategoryList from 'components/meal-category-list';
 
 import { useNavigate } from 'react-router';
 import Spacer from 'components/spacer';
@@ -23,6 +24,9 @@ const HomePage: React.FC = () => {
           <Spacer top={32}>
             <SearchRow onSearch={handleSearch} />
           </Spacer>
+        </PageSection>
+        <PageSection>
+          <MealCategoryList />
         </PageSection>
         <PageSection title="Trending Today">
           <Banner />

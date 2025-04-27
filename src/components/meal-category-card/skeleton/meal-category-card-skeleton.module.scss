@@ -1,0 +1,7 @@
+.skeleton {
+  min-height: 128px;
+
+  @media (--medium-viewport) {
+    min-height: 192px;
+  }
+}

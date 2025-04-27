@@ -26,7 +26,7 @@ const RecipeList: React.FC<Props> = (props) => {
       <li key={recipe.documentId} className={classes.item}>
         <RecipeCard
           className={classes.card}
-          image={recipe.images[0]?.formats.thumbnail?.url}
+          image={recipe.images?.[0]?.formats?.thumbnail?.url}
           title={
             <Link to={`/recipes/${recipe.documentId}`} overlay>
               {recipe.name}

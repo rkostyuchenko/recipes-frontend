@@ -10,6 +10,8 @@ class MealCategoriesStore implements BaseDataProvider {
 
   constructor() {
     makeObservable(this);
+
+    this.fetchMealCategoriesList();
   }
 
   @computed

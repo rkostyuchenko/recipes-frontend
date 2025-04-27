@@ -1,11 +1,9 @@
 import { MealCategoryId } from 'domain/meal-categories';
 
-type ImageFormat = 'thumbnail' | 'medium' | 'large';
-
 type RecipeImage = {
   url: string;
   formats: {
-    [key in ImageFormat]?: {
+    [key in 'thumbnail' | 'medium' | 'large']?: {
       url: string;
     };
   };

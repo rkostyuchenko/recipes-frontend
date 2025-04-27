@@ -1,7 +1,7 @@
 .list {
   padding: 0;
   margin: 0;
-  --gutter: var(--space-6);
+  --gutter: var(--space-4);
 
   @media (--small-viewport) {
     display: grid;
@@ -10,7 +10,7 @@
   }
 
   @media (--medium-viewport) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     display: grid;
   }
 }
