@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "scripts": {
     "dev": "NODE_ENV=development webpack serve --config config/webpack/webpack.config.js",
-    "build": "NODE_ENV=production tsc -b && webpack --config config/webpack/webpack.config.js",
+    "prebuild": "tsc -b",
+    "build": "NODE_ENV=production webpack --config config/webpack/webpack.config.js",
+    "predeploy": "BASE_URL=/recipes-frontend/ yarn build", 
+    "deploy": "gh-pages -d dist -b dist",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },

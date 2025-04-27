@@ -10,6 +10,7 @@ const environment = {
   NODE_ENV: process.env.NODE_ENV,
   isEnvProduction: process.env.NODE_ENV === 'production',
   isEnvDevelopment: process.env.NODE_ENV === 'development',
+  baseUrl: process.env.BASE_URL ?? '/',
 };
 
 module.exports = merge(
@@ -23,7 +24,7 @@ module.exports = merge(
     mode: environment.NODE_ENV,
     entry: './src/main.tsx',
     output: {
-      publicPath: '/',
+      publicPath: environment.baseUrl,
       filename: environment.isEnvProduction ? `static/[name].[contenthash].js` : '[name].js',
       assetModuleFilename: `static/[contenthash][ext]`,
       clean: true,
