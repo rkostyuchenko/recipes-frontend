@@ -14,10 +14,15 @@ module.exports = ({ NODE_ENV, isEnvProduction, isEnvDevelopment }) => ({
             loader: require.resolve('css-loader'),
             options: {
               importLoaders: 1,
-              modules: true,
+              modules: {
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+              },
               esModule: false,
               sourceMap: isEnvDevelopment,
             },
+          },
+          {
+            loader: require.resolve('postcss-loader'),
           },
           {
             loader: require.resolve('sass-loader'),
