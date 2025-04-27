@@ -4,15 +4,6 @@
   gap: var(--space-l);
 }
 
-.searchRow {
-  display: flex;
-}
-
-.searchInput {
-  flex-grow: 1;
-  margin: 0 var(--space-l) 0 0;
-}
-
 .fieldsRow {
   @media (--small-viewport) {
     display: grid;
