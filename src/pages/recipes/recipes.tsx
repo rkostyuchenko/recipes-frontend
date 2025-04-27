@@ -1,57 +1,23 @@
 import RecipeList from 'components/recipe-list';
-import RecipesFilters, { RecipeFiltersValues, RecipesFiltersContext } from 'components/recipes-filters';
+import RecipesFilters, { RecipesFiltersContext } from 'components/recipes-filters';
 import { PageSection, PageMargin } from 'components/page';
 import Spacer from 'components/spacer';
 import NoRecipesMessage from 'components/no-recipes-message';
 import Text from 'ui/text';
 
 import { useEffect, useMemo } from 'react';
-import { useSearchParams } from 'react-router';
 import { observer, useLocalObservable } from 'mobx-react-lite';
-import RecipesStore from 'stores/recipes';
 import { FiltersStore, FieldStore } from 'stores/filters';
+import useRecipes from 'hooks/use-recipes';
 import { useStore } from 'services/store';
-import qs from 'query-string';
-
-const useQuery = () => {
-  const [searchParams] = useSearchParams();
-  const query = qs.parse(searchParams.toString(), {
-    parseNumbers: true,
-    types: {
-      page: 'number',
-      category: 'number[]',
-    },
-    arrayFormat: 'comma',
-  });
-
-  return query as { page: number } & RecipeFiltersValues;
-};
-
-const useQueryUpdate = (newQuery: Record<string, string | number[]>) => {
-  const [, setSearchParams] = useSearchParams();
-
-  const query = useQuery();
-  const search = qs.stringify(
-    {
-      ...query,
-      ...newQuery,
-    },
-    {
-      skipEmptyString: true,
-      arrayFormat: 'comma',
-    },
-  );
-
-  useEffect(() => {
-    setSearchParams(new URLSearchParams(search), { replace: true });
-  }, [search]);
-};
+import { useQuery, useQueryUpdate } from 'hooks/use-query';
+import { RecipeFiltersValues } from 'domain/recipes';
 
 const RecipesPage: React.FC = observer(() => {
-  const { name, category, page } = useQuery();
+  const { page, name, category } = useQuery() as { page: number } & RecipeFiltersValues;
   const normalizedCategory = useMemo(() => (Array.isArray(category) ? category : [category]), [category]);
   const mealCategoriesStore = useStore('mealCategories');
-  const recipesStore = useLocalObservable(() => new RecipesStore(page));
+
   const recipeFiltersStore = useLocalObservable(
     () =>
       new FiltersStore<RecipeFiltersValues>({
@@ -59,26 +25,16 @@ const RecipesPage: React.FC = observer(() => {
         category: new FieldStore([], normalizedCategory),
       }),
   );
-
-  const { fetchRecipesList, pagination } = recipesStore;
   const { filterValues, clearFilters } = recipeFiltersStore;
+
+  const { isLoading, isCompleted, recipes, pageCount, pagination, handlePageChange } = useRecipes(page, filterValues);
 
   useEffect(() => {
     mealCategoriesStore.fetchMealCategoriesList();
   }, []);
 
-  useEffect(() => {
-    fetchRecipesList(filterValues);
-  }, [pagination.pageNumber, filterValues]);
-
-  const handlePageChange = (page: number) => {
-    pagination.updateParams({
-      pageNumber: page,
-    });
-  };
-
   useQueryUpdate({
-    page: `${recipesStore.pagination.pageNumber}`,
+    page: `${pagination.pageNumber}`,
     ...filterValues,
   });
 
@@ -88,25 +44,25 @@ const RecipesPage: React.FC = observer(() => {
         <Text variant="header-2" as="h1" color="accent">
           Recipes
         </Text>
-        {recipesStore.isCompleted && (
-          <Spacer top={32}>
-            <RecipesFiltersContext value={recipeFiltersStore}>
-              <RecipesFilters />
-            </RecipesFiltersContext>
-            <Spacer top={48}>
-              {recipesStore.recipes.length ? (
-                <RecipeList
-                  recipes={recipesStore.recipes}
-                  currentPage={recipesStore.pagination.pageNumber}
-                  totalPages={recipesStore.pageCount}
-                  onPageChange={handlePageChange}
-                />
-              ) : (
-                <NoRecipesMessage onClearFiltersClick={clearFilters} />
-              )}
-            </Spacer>
+        <Spacer top={32}>
+          <RecipesFiltersContext value={recipeFiltersStore}>
+            <RecipesFilters />
+          </RecipesFiltersContext>
+          <Spacer top={48}>
+            {isCompleted && !recipes.length ? (
+              <NoRecipesMessage onClearFiltersClick={clearFilters} />
+            ) : (
+              <RecipeList
+                recipes={recipes}
+                isLoading={isLoading}
+                currentPage={pagination.pageNumber}
+                totalPages={pageCount}
+                onPageChange={handlePageChange}
+                skeletonCount={9}
+              />
+            )}
           </Spacer>
-        )}
+        </Spacer>
       </PageMargin>
     </PageSection>
   );

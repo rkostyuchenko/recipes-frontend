@@ -1,3 +1,5 @@
+import { MealCategoryId } from 'domain/meal-categories';
+
 type ImageFormat = 'thumbnail' | 'medium' | 'large';
 
 type RecipeImage = {
@@ -49,4 +51,10 @@ export type RecipeDetails = {
   ingradients: Ingredient[];
   equipments: RecipeEquipment[];
   directions: Direction[];
+};
+
+export type RecipeFiltersValues = {
+  name: string;
+  category: MealCategoryId[];
+  id?: RecipeId[];
 };

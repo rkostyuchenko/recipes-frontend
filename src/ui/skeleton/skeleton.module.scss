@@ -1,0 +1,15 @@
+.skeleton {
+  display: inline-block;
+  background-color: var(--color-generic-skeleton);
+  width: 100%;
+  animation: skeleton-animate-fade .8s ease-in-out infinite alternate;
+}
+
+@keyframes skeleton-animate-fade {
+  from {
+    opacity: 1
+  }
+  to {
+    opacity: .4
+  }
+}

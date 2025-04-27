@@ -20,7 +20,7 @@
   --color-generic-brand-hover: rgba(var(--color-brand), .85);
   --color-generic-line: rgb(228, 228, 228);
   --color-generic-disabled: rgb(217, 217, 217);
-  --color-generic-skeleton: rgb(242, 241, 234);
+  --color-generic-skeleton: rgba(var(--color-black), .05);
 
   --space-base: 4px;
 

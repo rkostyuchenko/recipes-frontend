@@ -38,6 +38,8 @@ class RecipesStore implements BaseDataProvider {
 
   @action.bound
   async fetchRecipesList(filters?: FetchListParams['filters']) {
+    this._loadingStatus = LoadingStatus.pending;
+
     let response: Response<Recipe[]>;
 
     try {

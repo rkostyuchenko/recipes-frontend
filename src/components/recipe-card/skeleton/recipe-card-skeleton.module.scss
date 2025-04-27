@@ -1,0 +1,17 @@
+.skeleton {}
+
+.image {
+  aspect-ratio: 1 / 1;
+  margin-bottom: var(--space-2);
+}
+
+.captionLine {
+  height: 20px;
+  border-radius: 4px;
+  width: 80%;
+
+  + .captionLine {
+    margin-top: 4px;
+    width: 60%;
+  }
+}

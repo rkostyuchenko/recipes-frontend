@@ -1,0 +1,7 @@
+.skeleton {
+  aspect-ratio: 3 / 4;
+
+  @media (--small-viewport) {
+    height: 500px; 
+  }
+}

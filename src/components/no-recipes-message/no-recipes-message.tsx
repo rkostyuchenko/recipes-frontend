@@ -10,7 +10,7 @@ const NoRecipesMessage: React.FC<Props> = (props) => {
   const { onClearFiltersClick } = props;
 
   return (
-    <Text view="p-20" align="center">
+    <Text variant="body-2">
       No recipes found. Try looking for something else.{' '}
       <button className={classes.button} type="button" onClick={onClearFiltersClick}>
         Reset filters

@@ -2,7 +2,7 @@ import { observer } from 'mobx-react-lite';
 import { createContext, useCallback } from 'react';
 import { useContextSafely } from 'hooks/use-context-safely';
 import { FiltersStore } from 'stores/filters';
-import { RecipeFiltersValues } from './types';
+import { RecipeFiltersValues } from 'domain/recipes';
 
 import MealCategorySelect from './meal-category-select';
 

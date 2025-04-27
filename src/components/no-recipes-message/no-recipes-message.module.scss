@@ -2,11 +2,11 @@
   font: inherit;
   border: 0;
   background: 0;
-  color: var(--brand);
+  color: var(--color-text-brand);
   cursor: pointer;
   padding: 0;
 
   &:hover {
-    color: var(--brand-hover);
+    color: var(--color-text-brand-hover);
   }
 }

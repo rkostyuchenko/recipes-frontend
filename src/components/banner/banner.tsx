@@ -1,10 +1,10 @@
-import cn from 'classnames';
-import { observer } from 'mobx-react-lite';
-import { useStore } from 'services/store';
-import { useEffect } from 'react';
-
 import Text from 'ui/text';
 import Link from 'ui/link';
+import BannerSkeleton from './skeleton';
+
+import cn from 'classnames';
+import { observer } from 'mobx-react-lite';
+import useRecipeSuggest from 'hooks/use-recipe-suggest';
 
 import classes from './banner.module.scss';
 
@@ -15,14 +15,11 @@ interface Props {
 const Banner: React.FC<Props> = observer((props) => {
   const { className } = props;
 
-  const recipeSuggestStore = useStore('recipeSuggest');
-  const { fetchRecipeSuggest, recipeSuggest } = recipeSuggestStore;
+  const { isLoading, recipeSuggest } = useRecipeSuggest();
 
-  useEffect(() => {
-    if (!recipeSuggest) {
-      fetchRecipeSuggest();
-    }
-  }, []);
+  if (isLoading) {
+    return <BannerSkeleton />;
+  }
 
   if (!recipeSuggest) {
     return null;
