@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 import LoadingStatus from 'utils/enums/loading-status';
 import { Response } from 'utils/api-request';
 import { RecipeDetails, RecipeId } from 'domain/recipes';
@@ -6,17 +6,21 @@ import recipesApi from 'services/api/recipes';
 import { BaseDataProvider } from 'stores/types';
 
 class RecipeStore implements BaseDataProvider {
+  @observable.ref
   private _recipe: RecipeDetails | null = null;
+  @observable
   private _loadingStatus: LoadingStatus = LoadingStatus.initial;
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this);
   }
 
+  @computed
   get recipe() {
     return this._recipe;
   }
 
+  @action
   async fetchRecipe(id: RecipeId) {
     let response: Response<RecipeDetails>;
 
@@ -32,10 +36,12 @@ class RecipeStore implements BaseDataProvider {
     });
   }
 
+  @computed
   get isLoading() {
     return this._loadingStatus === LoadingStatus.pending;
   }
 
+  @computed
   get isCompleted() {
     return this._loadingStatus === LoadingStatus.done;
   }

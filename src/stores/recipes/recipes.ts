@@ -1,4 +1,4 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 import LoadingStatus from 'utils/enums/loading-status';
 import { Response } from 'utils/api-request';
 import { Recipe } from 'domain/recipes';
@@ -7,35 +7,38 @@ import { BaseDataProvider } from 'stores/types';
 import Pagination from 'stores/pagination';
 
 class RecipesStore implements BaseDataProvider {
+  @observable.ref
   private _recipes: Recipe[] = [];
+  @observable
   private _loadingStatus: LoadingStatus = LoadingStatus.initial;
+  @observable
   private _pageCount: number | undefined = undefined;
+  @observable
   private _pagination: Pagination;
-  private _lastFilters: FetchListParams['filters'];
 
   constructor(initialPage: number) {
     this._pagination = new Pagination(initialPage);
-    makeAutoObservable(this);
+    makeObservable(this);
   }
 
+  @computed
   get recipes() {
     return this._recipes;
   }
 
+  @computed
   get pagination() {
     return this._pagination;
   }
 
+  @computed
   get pageCount() {
     return this._pageCount;
   }
 
+  @action
   async fetchRecipesList(filters?: FetchListParams['filters']) {
     let response: Response<Recipe[]>;
-
-    if (this._lastFilters != null && this._lastFilters !== filters) {
-      this._pagination.updateParams({ pageNumber: 1 });
-    }
 
     try {
       response = await recipesApi.fetchRecipesList({
@@ -51,14 +54,15 @@ class RecipesStore implements BaseDataProvider {
       this._recipes = response.data;
       this._pageCount = response.meta.pagination.pageCount;
       this._loadingStatus = LoadingStatus.done;
-      this._lastFilters = filters;
     });
   }
 
+  @computed
   get isLoading() {
     return this._loadingStatus === LoadingStatus.pending;
   }
 
+  @computed
   get isCompleted() {
     return this._loadingStatus === LoadingStatus.done;
   }

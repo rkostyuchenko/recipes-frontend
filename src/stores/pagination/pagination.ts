@@ -1,4 +1,4 @@
-import { action, makeAutoObservable } from 'mobx';
+import { action, computed, makeObservable, observable } from 'mobx';
 
 const DEFAULT_PAGE_SIZE = 9;
 
@@ -7,24 +7,30 @@ type UpdateParams = {
 };
 
 class Pagination {
+  @observable
   private _pageSize: number;
+  @observable
   private _pageNumber: number;
+  @observable
   private _pageCount: number | null = null;
 
   constructor(initialPage: number = 1, pageSize = DEFAULT_PAGE_SIZE) {
     this._pageSize = pageSize;
     this._pageNumber = initialPage;
-    makeAutoObservable(this);
+    makeObservable(this);
   }
 
+  @computed
   get pageSize() {
     return this._pageSize;
   }
 
+  @computed
   get pageNumber() {
     return this._pageNumber;
   }
 
+  @computed
   get pageCount() {
     return this._pageCount;
   }

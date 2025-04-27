@@ -1,4 +1,4 @@
-import { makeAutoObservable, keys, action } from 'mobx';
+import { makeObservable, action, computed, observable, keys } from 'mobx';
 
 import FieldStore from './field';
 
@@ -7,17 +7,20 @@ type Filters<T> = {
 };
 
 export class FiltersStore<T> {
+  @observable
   private readonly _filters: Filters<T>;
 
   constructor(filters: Filters<T>) {
     this._filters = filters;
-    makeAutoObservable(this);
+    makeObservable(this);
   }
 
+  @computed
   get filters() {
     return this._filters;
   }
 
+  @computed
   get filterValues() {
     const mapped: T = {} as T;
 

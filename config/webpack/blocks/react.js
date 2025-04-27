@@ -1,6 +1,6 @@
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 
-module.exports = ({ NODE_ENV, isEnvDevelopment }) => ({
+module.exports = ({ isEnvDevelopment }) => ({
   name: 'react',
   mode: 'none',
   resolve: {
@@ -28,8 +28,7 @@ module.exports = ({ NODE_ENV, isEnvDevelopment }) => ({
               ],
               cacheDirectory: true,
               plugins: [
-                // require.resolve('@babel/plugin-transform-react-constant-elements'),
-                [require.resolve('@babel/plugin-proposal-decorators'), { version: '2023-05' }],
+                [require.resolve('@babel/plugin-proposal-decorators'), { version: 'legacy' }],
                 isEnvDevelopment && require.resolve('react-refresh/babel'),
               ].filter(Boolean),
             },

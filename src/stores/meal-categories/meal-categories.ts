@@ -1,20 +1,23 @@
-import { makeAutoObservable, runInAction } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction } from 'mobx';
 import { Response } from 'utils/api-request';
 import { MealCategory } from 'domain/meal-categories';
 import mealCategoriesApi from 'services/api/meal-categories';
 import { BaseDataProvider } from 'stores/types';
 
 class MealCategoriesStore implements BaseDataProvider {
+  @observable.ref
   private _mealCategories: MealCategory[] = [];
 
   constructor() {
-    makeAutoObservable(this);
+    makeObservable(this);
   }
 
+  @computed
   get mealCategories() {
     return this._mealCategories;
   }
 
+  @action.bound
   async fetchMealCategoriesList() {
     let response: Response<MealCategory[]>;
 

@@ -3,7 +3,7 @@ import Button from 'ui/button';
 import SearchIcon from 'ui/icons/search-icon';
 
 import { observer } from 'mobx-react-lite';
-import { createContext, useEffect, useRef } from 'react';
+import { createContext, useCallback, useState } from 'react';
 import { useContextSafely } from 'hooks/use-context-safely';
 import { FiltersStore } from 'stores/filters';
 import { RecipeFiltersValues } from './types';
@@ -13,36 +13,29 @@ import MealCategorySelect from './meal-category-select';
 import classes from './recipes-filters.module.scss';
 
 const RecipesFilters: React.FC = observer(() => {
-  const { filters } = useContextSafely(RecipesFiltersContext);
-  const { name } = filters;
+  const filtersStore = useContextSafely(RecipesFiltersContext);
+  const { filters } = filtersStore;
 
-  const searchInputRef = useRef<HTMLInputElement>(null);
+  const [search, setSearch] = useState(filters.name.value);
 
-  const handleSearch = (event: React.FormEvent) => {
-    event.preventDefault();
+  const handleSearch = useCallback(
+    (event: React.FormEvent) => {
+      event.preventDefault();
 
-    if (searchInputRef.current) {
-      name.setValue(searchInputRef.current.value);
-    }
+      filters.name.setValue(search);
+    },
+    [filters.name, search],
+  );
+
+  const searchInputProps = {
+    value: search,
+    onChange: setSearch,
   };
-
-  const nameFilterValue = name.value;
-
-  useEffect(() => {
-    if (nameFilterValue == '' && searchInputRef.current) {
-      searchInputRef.current.value = nameFilterValue;
-    }
-  }, [nameFilterValue]);
 
   return (
     <form className={classes.filters} onSubmit={handleSearch}>
       <div className={classes.searchRow}>
-        <Input
-          ref={searchInputRef}
-          className={classes.searchInput}
-          placeholder="Enter dishes"
-          defaultValue={name.value}
-        />
+        <Input className={classes.searchInput} placeholder="Enter dishes" {...searchInputProps} />
         <Button type="submit">
           <SearchIcon />
         </Button>
