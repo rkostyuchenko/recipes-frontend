@@ -1,17 +1,39 @@
 .list {
-  display: grid;
   padding: 0;
   margin: 0;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 80px;
+
+  @media (--small-viewport) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-xl);
+  }
+
+  @media (--medium-viewport) {
+    grid-template-columns: repeat(3, 1fr);
+    display: grid;
+  }
+
+  @media (--large-viewport) {
+    gap: 80px;
+  }
 }
 
 .item {
   display: block;
+
+  &:not(:last-child) {
+    margin-bottom: var(--space-xl);
+
+    @media (--small-viewport) {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .card {
-  height: 100%;
+  @media (--small-viewport) {
+    height: 100%;
+  }
 }
 
 .pagination {

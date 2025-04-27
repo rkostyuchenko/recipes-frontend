@@ -12,7 +12,7 @@ interface Props {
 
 const HeaderLogo: React.FC<Props> = ({ className }) => (
   <div className={cn(className, classes.logo)}>
-    <Logo />
+    <Logo className={classes.mark} />
     <Link className={classes.link} to="/">
       <Text className={classes.text} view="p-20" tag="span" weight="bold">
         Food Client

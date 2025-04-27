@@ -3,8 +3,7 @@ import { rootStore, StoreProvider } from 'services/store';
 
 import 'ui/font';
 import 'styles/global.scss';
-import 'styles/colors.scss';
-import 'styles/sizes.scss';
+import 'styles/variables.scss';
 
 const AppRoot = () => (
   <StoreProvider value={rootStore}>

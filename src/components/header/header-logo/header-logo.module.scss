@@ -6,6 +6,7 @@
 
 .text {
   margin: 0 0 0 var(--space-l);
+  white-space: nowrap;
 }
 
 .link {
@@ -18,4 +19,8 @@
     display: block;
     position: absolute;
   }
+}
+
+.mark {
+  flex-shrink: 0;
 }

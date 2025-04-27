@@ -2,18 +2,28 @@ $layout-column-gap: 48px;
 
 .layout {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
   grid-template-areas:
-    "name        name"
-    "image       meta"
-    "summary     summary"
-    "ingredients equipment"
-    "directions  directions";
+    "name"
+    "image"
+    "meta"
+    "summary"
+    "ingredients"
+    "equipment"
+    "directions";
   gap: $layout-column-gap $layout-column-gap * 2;
+
+  @media (--medium-viewport) {
+    grid-template-areas:
+      "name        name"
+      "image       meta"
+      "summary     summary"
+      "ingredients equipment"
+      "directions  directions";
+  }
 }
 
 .name {
-  grid-area: name; 
+  grid-area: name;
 
   .link {
     text-decoration: none;
@@ -90,33 +100,36 @@ $layout-column-gap: 48px;
 }
 
 .column {
-  + .column {
-    position: relative;
+  @media (--medium-viewport) {
 
-    $delimiter-left: -$layout-column-gap;
+    +.column {
+      position: relative;
 
-    &::before {
-      content: '';
-      display: block;
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background-color: var(--brand);
-      position: absolute;
-      left: $delimiter-left;
-      transform: translateX(-50%);
-    }
+      $delimiter-left: -$layout-column-gap;
 
-    &::after {
-      display: block;
-      content: '';
-      position: absolute;
-      bottom: 0;
-      background: var(--brand);
-      width: 1px;
-      top: 12px;
-      left: $delimiter-left;
-      transform: translateX(-50%);
+      &::before {
+        content: '';
+        display: block;
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background-color: var(--brand);
+        position: absolute;
+        left: $delimiter-left;
+        transform: translateX(-50%);
+      }
+
+      &::after {
+        display: block;
+        content: '';
+        position: absolute;
+        bottom: 0;
+        background: var(--brand);
+        width: 1px;
+        top: 12px;
+        left: $delimiter-left;
+        transform: translateX(-50%);
+      }
     }
   }
 }
@@ -155,11 +168,15 @@ $layout-column-gap: 48px;
 
 .meta {
   grid-area: meta;
-  margin: auto;
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  text-align: center;
-  gap: 100px;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (--small-vewport) {
+    margin: auto;
+    text-align: center;
+    gap: 100px;
+    grid-template-columns: repeat(3, auto);
+  }
 }
 
 .term {
@@ -177,8 +194,13 @@ $layout-column-gap: 48px;
 }
 
 .image {
-  grid-aria: image;
+  grid-area: image;
   border-radius: var(--border-radius);
-  width: 448px;
-  height: 298px;
+  aspect-ratio: 3 / 2;
+  width: 100%;
+
+  @media (--small-vewport) {
+    width: 448px;
+    max-width: 100%;
+  }
 }

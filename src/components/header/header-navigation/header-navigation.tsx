@@ -17,17 +17,15 @@ const HeaderNavigation: React.FC<Props> = (props) => {
   const { className, items } = props;
 
   return (
-    <nav className={cn(className)}>
-      <ul className={classes.list}>
-        {items.map((item) => (
-          <li key={item.text} className={classes.item}>
-            <NavLink className={({ isActive }) => cn(classes.link, { [classes.active]: isActive })} to={item.anchor}>
-              {item.text}
-            </NavLink>
-          </li>
-        ))}
-      </ul>
-    </nav>
+    <menu className={cn(classes.list, className)}>
+      {items.map((item) => (
+        <li key={item.text} className={classes.item}>
+          <NavLink className={({ isActive }) => cn(classes.link, { [classes.active]: isActive })} to={item.anchor}>
+            {item.text}
+          </NavLink>
+        </li>
+      ))}
+    </menu>
   );
 };
 
