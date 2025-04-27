@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useLocalObservable } from 'mobx-react-lite';
 import RecipesStore from 'stores/recipes';
-import { RecipeFiltersValues } from 'components/recipes-filters';
+import { RecipeFiltersValues } from 'domain/recipes';
 
 const useRecipes = (page: number, filterValues: RecipeFiltersValues) => {
   const recipesStore = useLocalObservable(() => new RecipesStore(page));

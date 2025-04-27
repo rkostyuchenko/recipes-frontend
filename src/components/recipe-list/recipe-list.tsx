@@ -41,7 +41,7 @@ const RecipeList: React.FC<Props> = (props) => {
   const emptyContent = useMemo(() => {
     return Array(skeletonCount)
       .fill(null)
-      .map((item, index) => (
+      .map((_, index) => (
         <li key={index} className={classes.item}>
           <RecipeCardSkeleton />
         </li>

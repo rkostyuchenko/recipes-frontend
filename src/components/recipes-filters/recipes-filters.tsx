@@ -5,9 +5,11 @@ import { FiltersStore } from 'stores/filters';
 import { RecipeFiltersValues } from 'domain/recipes';
 
 import MealCategorySelect from './meal-category-select';
+import SearchRow from 'components/search-row';
 
 import classes from './recipes-filters.module.scss';
-import SearchRow from 'components/search-row';
+
+type FilterValues = Required<Pick<RecipeFiltersValues, 'category' | 'name'>>;
 
 const RecipesFilters: React.FC = observer(() => {
   const filtersStore = useContextSafely(RecipesFiltersContext);
@@ -32,5 +34,5 @@ const RecipesFilters: React.FC = observer(() => {
 
 export default RecipesFilters;
 
-export const RecipesFiltersContext = createContext<FiltersStore<RecipeFiltersValues> | undefined>(undefined);
+export const RecipesFiltersContext = createContext<FiltersStore<FilterValues> | undefined>(undefined);
 RecipesFiltersContext.displayName = 'RecipesFiltersContext';

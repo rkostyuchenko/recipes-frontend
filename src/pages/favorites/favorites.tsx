@@ -6,11 +6,16 @@ import Spacer from 'components/spacer';
 import { useMemo } from 'react';
 import { observer } from 'mobx-react-lite';
 import { useStore } from 'services/store';
-import { useQuery, useQueryUpdate } from 'hooks/use-query';
+import { useTypedQuery, useQueryUpdate } from 'hooks/use-query';
 import useRecipes from 'hooks/use-recipes';
+import { z } from 'zod';
+
+const queryParamsSchema = z.object({
+  page: z.coerce.number().default(1).catch(1),
+});
 
 const FavoritesPage = observer(() => {
-  const { page } = useQuery() as { page: number };
+  const { page } = useTypedQuery(queryParamsSchema);
 
   const userStore = useStore('userStore');
   const { favorites } = userStore;

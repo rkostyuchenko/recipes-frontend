@@ -54,7 +54,7 @@ export type RecipeDetails = {
 };
 
 export type RecipeFiltersValues = {
-  name: string;
-  category: MealCategoryId[];
+  name?: string;
+  category?: MealCategoryId[];
   id?: RecipeId[];
 };

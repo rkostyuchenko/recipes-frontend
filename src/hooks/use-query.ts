@@ -1,34 +1,34 @@
 import { useEffect } from 'react';
-import { useSearchParams } from 'react-router';
 import qs from 'query-string';
+import { useSearchParams } from 'react-router';
+import type { ZodTypeAny } from 'zod';
 
-export const useQuery = () => {
+export const useTypedQuery = <T extends ZodTypeAny>(schema: T): ReturnType<T['parse']> => {
   const [searchParams] = useSearchParams();
-  const query = qs.parse(searchParams.toString(), {
-    parseNumbers: true,
-    types: {
-      page: 'number',
-      category: 'number[]',
-    },
-    arrayFormat: 'comma',
-  });
 
-  return query;
+  return schema.parse(searchParamsToValues(searchParams));
 };
 
-export const useQueryUpdate = (newQuery: Record<string, string | string[] | number[]>) => {
-  const [, setSearchParams] = useSearchParams();
+type SearchParamsValues = Record<string, string[] | string | undefined>;
 
-  const query = useQuery();
+function searchParamsToValues(searchParams: URLSearchParams): SearchParamsValues {
+  return Array.from(searchParams.keys()).reduce((record, key) => {
+    const values = searchParams.getAll(key);
+
+    return { ...record, [key]: values.length > 1 ? values : values[0] };
+  }, {} as SearchParamsValues);
+}
+
+export const useQueryUpdate = (newQuery: Record<string, string | string[] | number[]>) => {
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = qs.parse(searchParams.toString());
+
   const search = qs.stringify(
     {
       ...query,
       ...newQuery,
     },
-    {
-      skipEmptyString: true,
-      arrayFormat: 'comma',
-    },
+    { skipEmptyString: true },
   );
 
   useEffect(() => {

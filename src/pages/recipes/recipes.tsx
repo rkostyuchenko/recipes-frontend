@@ -5,24 +5,35 @@ import Spacer from 'components/spacer';
 import NoRecipesMessage from 'components/no-recipes-message';
 import Text from 'ui/text';
 
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { observer, useLocalObservable } from 'mobx-react-lite';
 import { FiltersStore, FieldStore } from 'stores/filters';
 import useRecipes from 'hooks/use-recipes';
 import { useStore } from 'services/store';
-import { useQuery, useQueryUpdate } from 'hooks/use-query';
+import { useTypedQuery, useQueryUpdate } from 'hooks/use-query';
 import { RecipeFiltersValues } from 'domain/recipes';
+import { z } from 'zod';
+
+type FilterValues = Required<Pick<RecipeFiltersValues, 'category' | 'name'>>;
+
+const queryParamsSchema = z.object({
+  page: z.coerce.number().default(1).catch(1),
+  name: z.string().default(''),
+  category: z
+    .union([z.string().transform((x) => [x]), z.array(z.string())])
+    .pipe(z.array(z.coerce.number()).catch([]))
+    .default([]),
+});
 
 const RecipesPage: React.FC = observer(() => {
-  const { page, name, category } = useQuery() as { page: number } & RecipeFiltersValues;
-  const normalizedCategory = useMemo(() => (Array.isArray(category) ? category : [category]), [category]);
+  const { page, name, category } = useTypedQuery(queryParamsSchema);
   const mealCategoriesStore = useStore('mealCategories');
 
   const recipeFiltersStore = useLocalObservable(
     () =>
-      new FiltersStore<RecipeFiltersValues>({
+      new FiltersStore<FilterValues>({
         name: new FieldStore('', name),
-        category: new FieldStore([], normalizedCategory),
+        category: new FieldStore([], category),
       }),
   );
   const { filterValues, clearFilters } = recipeFiltersStore;
