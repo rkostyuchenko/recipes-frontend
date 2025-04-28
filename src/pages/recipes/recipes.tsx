@@ -6,6 +6,8 @@ import NoRecipesMessage from 'components/no-recipes-message';
 import Text from 'ui/text';
 
 import { observer, useLocalObservable } from 'mobx-react-lite';
+import { useEffect } from 'react';
+import { useNavigationType } from 'react-router';
 import { FiltersStore, FieldStore } from 'stores/filters';
 import useRecipes from 'hooks/use-recipes';
 import { useTypedQuery, useQueryUpdate } from 'hooks/use-query';
@@ -41,6 +43,15 @@ const RecipesPage: React.FC = observer(() => {
     page: `${pagination.pageNumber}`,
     ...filterValues,
   });
+
+  const navigationType = useNavigationType();
+
+  // TODO: remove quickfix
+  useEffect(() => {
+    if (navigationType !== 'REPLACE') {
+      clearFilters();
+    }
+  }, [navigationType]);
 
   return (
     <PageSection>

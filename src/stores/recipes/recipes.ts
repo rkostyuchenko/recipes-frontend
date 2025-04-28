@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable, runInAction } from 'mobx';
+import { action, computed, makeObservable, observable, runInAction, reaction } from 'mobx';
 import LoadingStatus from 'utils/enums/loading-status';
 import { Response } from 'utils/api-request';
 import { Recipe } from 'domain/recipes';
@@ -9,6 +9,8 @@ import Pagination from 'stores/pagination';
 class RecipesStore implements BaseDataProvider {
   @observable.ref
   private _recipes: Recipe[] = [];
+  @observable.ref
+  private _filters: FetchListParams['filters'];
   @observable
   private _loadingStatus: LoadingStatus = LoadingStatus.initial;
   @observable
@@ -19,6 +21,13 @@ class RecipesStore implements BaseDataProvider {
   constructor(initialPage: number) {
     this._pagination = new Pagination(initialPage);
     makeObservable(this);
+
+    reaction(
+      () => this._filters,
+      () => {
+        this.pagination.updateParams({ pageNumber: 1 });
+      },
+    );
   }
 
   @computed
@@ -39,6 +48,7 @@ class RecipesStore implements BaseDataProvider {
   @action.bound
   async fetchRecipesList(filters?: FetchListParams['filters']) {
     this._loadingStatus = LoadingStatus.pending;
+    this._filters = filters;
 
     let response: Response<Recipe[]>;
 
