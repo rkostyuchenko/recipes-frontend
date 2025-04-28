@@ -22,9 +22,21 @@ const SearchRow: React.FC<Props> = (props) => {
     }
   };
 
+  const handleKeyUp = (event: React.KeyboardEvent) => {
+    if (event.key === 'Enter') {
+      handleSearch();
+    }
+  };
+
   return (
     <div className={classes.searchRow}>
-      <Input ref={inputRef} className={classes.searchInput} placeholder="Enter dishes" defaultValue={defaultValue} />
+      <Input
+        ref={inputRef}
+        className={classes.searchInput}
+        placeholder="Enter dishes"
+        defaultValue={defaultValue}
+        onKeyUp={handleKeyUp}
+      />
       <Button type="button" onClick={handleSearch}>
         Search
       </Button>
